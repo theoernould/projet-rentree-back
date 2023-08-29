@@ -1,19 +1,19 @@
 package imt.projetrentree.projet.controllers;
 
+import imt.projetrentree.projet.dto.UserCreationDTO;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.services.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final AuthService authService;
@@ -24,8 +24,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UUID register(@RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password) {
-        return authService.register(firstname, lastname, email, password);
+    public UUID register(@RequestBody UserCreationDTO user) {
+        log.info("Registering user: {}", user);
+        return authService.register(user);
     }
 
     @GetMapping("/info")
@@ -33,7 +34,7 @@ public class AuthController {
         return authService.info(token);
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public void logout(@RequestParam UUID token) {
         authService.logout(token);
     }

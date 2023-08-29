@@ -1,5 +1,6 @@
 package imt.projetrentree.projet.services;
 
+import imt.projetrentree.projet.dto.UserCreationDTO;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +23,19 @@ public class AuthService {
     }
 
     public UUID login(String email, String password) {
-        if (userRepository.existsByUsernameAndPassword(email, password)) {
+        if (userRepository.existsByEmailAndPassword(email, password)) {
             UUID token = UUID.randomUUID();
-            AuthService.users.put(token, userRepository.findByUsernameAndPassword(email, password));
+            AuthService.users.put(token, userRepository.findByEmailAndPassword(email, password));
             return token;
         } else {
             return null;
         }
     }
 
-    public UUID register(String firstname, String lastname, String email, String password) {
+    public UUID register(UserCreationDTO userToCreate) {
         UUID id = UUID.randomUUID();
 
-        User user = User.builder()
-                .email(email)
-                .firstname(firstname)
-                .lastname(lastname)
-                .password(password)
-                .balance(BEGIN_BALANCE)
-                .build();
-
-        AuthService.users.put(id, userRepository.save(user));
+        AuthService.users.put(id, userRepository.save(userToCreate.toUser(BEGIN_BALANCE)));
         return id;
     }
 

@@ -1,15 +1,13 @@
 package imt.projetrentree.projet.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "dishes")
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,6 +20,6 @@ public class Dish {
     String name;
     String description;
     String image;
-    DishCategory category;
+    String category;
     Double price;
 }
