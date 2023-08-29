@@ -1,5 +1,5 @@
 # Utilisation de l'image Docker officielle de Maven, basée sur OpenJDK
-FROM maven:3.8.4-openjdk-17
+FROM maven:3.8.5-openjdk-17
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -16,6 +16,6 @@ RUN mvn clean install
 
 RUN chmod +x /usr/src/app/run.sh
 
-EXPOSE 8000
+EXPOSE 8080
 # Commande par défaut pour exécuter l'application (vous pouvez la personnaliser)
 CMD ["/usr/src/app/run.sh"]
