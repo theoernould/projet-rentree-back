@@ -1,41 +1,38 @@
 package imt.projetrentree.projet.controllers;
 
-import imt.projetrentree.projet.dto.UserCreationDTO;
-import imt.projetrentree.projet.models.User;
-import imt.projetrentree.projet.services.AuthService;
-import lombok.RequiredArgsConstructor;
+import jakarta.ws.rs.Path;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
-@RestController
-@RequestMapping("/api/auth")
-@RequiredArgsConstructor
+@Path("auth")
 @Slf4j
 public class AuthController {
 
-    private final AuthService authService;
+    /*@Autowired
+    private AuthService authService;
 
-    @PostMapping("/login")
-    public UUID login(@RequestParam String email, @RequestParam String password) {
-        return authService.login(email, password);
+    @POST
+    @Path("login")
+    public String login(@RequestBody UserConnectionDTO userConnectionDTO) {
+        return authService.login(userConnectionDTO.getEmail(), userConnectionDTO.getPassword());
     }
 
-    @PostMapping("/register")
-    public UUID register(@RequestBody UserCreationDTO user) {
+    @POST
+    @Path("register")
+    @Consumes("application/json")
+    public String register(@RequestBody UserCreationDTO user) {
         log.info("Registering user: {}", user);
         return authService.register(user);
     }
 
-    @GetMapping("/info")
-    public User info(@RequestParam UUID token) {
+    @GET
+    @Path("info")
+    public User info(@RequestParam String token) {
         return authService.info(token);
     }
 
-    @GetMapping("/logout")
-    public void logout(@RequestParam UUID token) {
+    @POST
+    @Path("logout")
+    public void logout(@RequestParam String token) {
         authService.logout(token);
-    }
+    }*/
 }

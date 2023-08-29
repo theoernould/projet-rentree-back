@@ -13,18 +13,18 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private static final Map<UUID, User> users = new HashMap<>();
+    private static final Map<String, User> users = new HashMap<>();
     private static final Double BEGIN_BALANCE = 100.0;
 
     private final UserRepository userRepository;
 
-    public User info(UUID token) {
+    public User info(String token) {
         return AuthService.users.get(token);
     }
 
-    public UUID login(String email, String password) {
+    public String login(String email, String password) {
         if (userRepository.existsByEmailAndPassword(email, password)) {
-            UUID token = UUID.randomUUID();
+            String token = UUID.randomUUID().toString();
             AuthService.users.put(token, userRepository.findByEmailAndPassword(email, password));
             return token;
         } else {
@@ -32,14 +32,14 @@ public class AuthService {
         }
     }
 
-    public UUID register(UserCreationDTO userToCreate) {
-        UUID id = UUID.randomUUID();
+    public String register(UserCreationDTO userToCreate) {
+        String id = UUID.randomUUID().toString();
 
         AuthService.users.put(id, userRepository.save(userToCreate.toUser(BEGIN_BALANCE)));
         return id;
     }
 
-    public void logout(UUID token) {
+    public void logout(String token) {
         AuthService.users.remove(token);
     }
 }
