@@ -17,6 +17,8 @@ COPY src ./src
 # Exécutez clean et compile en utilisant Maven et Java 17
 RUN mvn clean install
 
+RUN mvn clean package
+
 RUN chmod +x /usr/src/app/run.sh
 
 RUN dos2unix /usr/src/app/run.sh
