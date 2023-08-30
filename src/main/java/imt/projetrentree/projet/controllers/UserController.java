@@ -4,12 +4,13 @@ import imt.projetrentree.projet.dto.UserConnectionDTO;
 import imt.projetrentree.projet.dto.UserCreationDTO;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.services.UserService;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Path("user")
+@Path("users")
 @Slf4j
 public class UserController {
 
@@ -17,9 +18,9 @@ public class UserController {
     private UserService userService;
 
     @GET
-    @Path("/")
+    @Path("/info")
     @Produces("application/json")
-    public User info(@QueryParam("token") String token) {
+    public User info(@NotNull @QueryParam("token") String token) {
         log.info("Getting user info for token: {}", token);
         return userService.info(token);
     }
@@ -35,14 +36,14 @@ public class UserController {
     @POST
     @Path("register")
     @Consumes("application/json")
-    public String register(@RequestBody UserCreationDTO user) {
+    public void register(@RequestBody UserCreationDTO user) {
         log.info("Registering user: {}", user);
-        return userService.register(user);
+        userService.register(user);
     }
 
     @POST
     @Path("logout")
-    public void logout(@QueryParam("token") String token) {
+    public void logout(@NotNull @QueryParam("token") String token) {
         log.info("Logging out user with token: {}", token);
         userService.logout(token);
     }

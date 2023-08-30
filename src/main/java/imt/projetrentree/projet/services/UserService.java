@@ -1,6 +1,10 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.UserCreationDTO;
+import imt.projetrentree.projet.exceptions.user.AlreadyAuthenticatedException;
+import imt.projetrentree.projet.exceptions.user.BadCredentialsException;
+import imt.projetrentree.projet.exceptions.user.EmailAlreadyUsedException;
+import imt.projetrentree.projet.exceptions.user.UserNotAuthenticatedException;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,27 +23,44 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User info(String token) {
+        return getUserFromTokenAndThrowExceptionIfNotAuthenticated(token);
+    }
+
+    public User getUserFromTokenAndThrowExceptionIfNotAuthenticated(String token) {
+        if (!UserService.users.containsKey(token)) {
+            throw new UserNotAuthenticatedException();
+        }
         return UserService.users.get(token);
     }
 
     public String login(String email, String password) {
         if (userRepository.existsByEmailAndPassword(email, password)) {
+            verifyThatUserIsNotAlreadyAuthenticated(email);
             String token = UUID.randomUUID().toString();
             UserService.users.put(token, userRepository.findByEmailAndPassword(email, password));
             return token;
         } else {
-            return null;
+            throw new BadCredentialsException();
         }
     }
 
-    public String register(UserCreationDTO userToCreate) {
-        String id = UUID.randomUUID().toString();
+    private void verifyThatUserIsNotAlreadyAuthenticated(String email) {
+        if (UserService.users.values().stream().anyMatch(user -> user.getEmail().equals(email))) {
+            throw new AlreadyAuthenticatedException();
+        }
+    }
 
-        UserService.users.put(id, userRepository.save(userToCreate.toUser(BEGIN_BALANCE)));
-        return id;
+    public void register(UserCreationDTO userToCreate) {
+        if (userRepository.existsByEmail(userToCreate.getEmail())) {
+            throw new EmailAlreadyUsedException();
+        }
+        userRepository.save(userToCreate.toUser(BEGIN_BALANCE));
     }
 
     public void logout(String token) {
+        if (!UserService.users.containsKey(token)) {
+            throw new UserNotAuthenticatedException();
+        }
         UserService.users.remove(token);
     }
 }
