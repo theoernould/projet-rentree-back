@@ -35,7 +35,7 @@ CREATE TABLE DishOrders (
     FOREIGN KEY (idDish) REFERENCES Dishes(id)
 );
 
-INSERT INTO Dishes (id, name, image, category, info, price)
+INSERT INTO Dishes (id, name, image, category, description, price)
 VALUES
     (1, 'Spaghetti Carbonara', 'https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg', 'Pasta', 'Classic Italian pasta dish with eggs, cheese, pancetta, and black pepper.', 12.99),
     (2, 'Grilled Salmon', 'https://thekitchengirl.com/wp-content/uploads/Grilled-Salmon-a_19-1.jpg', 'Seafood', 'Fresh salmon fillet seasoned and grilled to perfection.', 18.50),
