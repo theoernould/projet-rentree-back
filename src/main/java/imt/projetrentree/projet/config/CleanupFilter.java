@@ -12,6 +12,5 @@ public class CleanupFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        TokenContext.clear();
     }
 }

@@ -1,5 +1,6 @@
 package imt.projetrentree.projet.models;
 
+import imt.projetrentree.projet.dto.user.UserInfoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,13 @@ public class User {
     String lastname;
 
     Double balance;
+
+    public UserInfoDTO toUserInfoDTO() {
+        return UserInfoDTO.builder()
+                .email(email)
+                .firstname(firstname)
+                .lastname(lastname)
+                .balance(balance)
+                .build();
+    }
 }

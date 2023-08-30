@@ -30,11 +30,11 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 return;
             }
 
-            TokenContext.setToken(token);
+            AuthContext.setToken(token);
         }
     }
 
     private boolean isValidToken(String token) {
-        return UserService.users.containsKey(token);
+        return UserService.usersIds.containsKey(token);
     }
 }

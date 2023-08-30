@@ -1,4 +1,4 @@
-package imt.projetrentree.projet.dto;
+package imt.projetrentree.projet.dto.user;
 
 import imt.projetrentree.projet.models.User;
 import lombok.Data;

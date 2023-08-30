@@ -1,9 +1,9 @@
-package imt.projetrentree.projet.dto;
+package imt.projetrentree.projet.dto.user;
 
 import lombok.Data;
 
 @Data
-public class UserConnectionDTO {
+public class UserCredentialsDTO {
     private String email;
     private String password;
 }

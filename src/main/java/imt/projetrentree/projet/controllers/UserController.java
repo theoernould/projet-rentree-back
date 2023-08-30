@@ -1,9 +1,9 @@
 package imt.projetrentree.projet.controllers;
 
 import imt.projetrentree.projet.config.NeedToBeAuthenticated;
-import imt.projetrentree.projet.config.TokenContext;
-import imt.projetrentree.projet.dto.UserConnectionDTO;
-import imt.projetrentree.projet.dto.UserCreationDTO;
+import imt.projetrentree.projet.dto.user.UserCredentialsDTO;
+import imt.projetrentree.projet.dto.user.UserCreationDTO;
+import imt.projetrentree.projet.dto.user.UserInfoDTO;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.services.UserService;
 import jakarta.validation.constraints.NotNull;
@@ -23,26 +23,23 @@ public class UserController {
     @Path("/info")
     @Produces("application/json")
     @NeedToBeAuthenticated
-    public User info() {
-        String token = TokenContext.getToken();
-        log.info("Getting user info for token: {}", token);
-        return userService.info(token);
+    public UserInfoDTO info() {
+        return userService.getCurrentUser().toUserInfoDTO();
     }
 
     @POST
     @Path("logout")
     @NeedToBeAuthenticated
-    public void logout(@NotNull @QueryParam("token") String token) {
-        log.info("Logging out user with token: {}", token);
-        userService.logout(token);
+    public void logout() {
+        userService.logout();
     }
 
     @POST
     @Path("login")
     @Consumes("application/json")
-    public String login(@RequestBody UserConnectionDTO userConnectionDTO) {
-        log.info("Logging in user: {}", userConnectionDTO);
-        return userService.login(userConnectionDTO.getEmail(), userConnectionDTO.getPassword());
+    public String login(@RequestBody UserCredentialsDTO userCredentialsDTO) {
+        log.info("Logging in user: {}", userCredentialsDTO);
+        return userService.login(userCredentialsDTO.getEmail(), userCredentialsDTO.getPassword());
     }
 
     @POST
@@ -52,4 +49,5 @@ public class UserController {
         log.info("Registering user: {}", user);
         userService.register(user);
     }
+
 }
