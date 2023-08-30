@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "bf0c5d61-81b2-4b7d-8a37-43c57a4064a2",
+		"name": "Projet Rentrée Back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20168802"
+	},
+	"item": [
+		{
+			"name": "Dishes",
+			"item": [
+				{
+					"name": "GetAllDishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddDish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"un plat\",\r\n    \"description\":\"c'est un bon plat\",\r\n    \"category\":\"healthy\",\r\n    \"image\":\"\",\r\n    \"price\":15.23\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "name",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "zedezdzedzedzedzedzedez",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "12.58",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteDishById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDishById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifyDish",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"zgueg\",\r\n    \"description\":\"zgueg\",\r\n    \"category\":\"meat\",\r\n    \"image\":\"zedzeduizedz\",\r\n    \"price\":69.69\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"noe.delcroix59@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"Noé\",\r\n    \"lastname\":\"Delcroix\",\r\n    \"email\":\"noe.delcroix59@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/info?token=933f7846-22f0-43e4-a6c9-9dabf71fe144",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"info"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "933f7846-22f0-43e4-a6c9-9dabf71fe144"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/logout?token=933f7846-22f0-43e4-a6c9-9dabf71fe144",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "933f7846-22f0-43e4-a6c9-9dabf71fe144"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
