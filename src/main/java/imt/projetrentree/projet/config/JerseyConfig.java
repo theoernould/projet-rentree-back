@@ -22,5 +22,8 @@ public class JerseyConfig extends ResourceConfig {
 
         // Ajoutez le chemin relatif à votre package de contrôleurs
         packages("imt.projetrentree.projet.controllers");
+
+        register(AuthenticationFilter.class);
+        register(CleanupFilter.class);
     }
 }

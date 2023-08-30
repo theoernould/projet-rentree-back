@@ -1,5 +1,7 @@
 package imt.projetrentree.projet.controllers;
 
+import imt.projetrentree.projet.config.NeedToBeAuthenticated;
+import imt.projetrentree.projet.config.TokenContext;
 import imt.projetrentree.projet.dto.UserConnectionDTO;
 import imt.projetrentree.projet.dto.UserCreationDTO;
 import imt.projetrentree.projet.models.User;
@@ -20,9 +22,19 @@ public class UserController {
     @GET
     @Path("/info")
     @Produces("application/json")
-    public User info(@NotNull @QueryParam("token") String token) {
+    @NeedToBeAuthenticated
+    public User info() {
+        String token = TokenContext.getToken();
         log.info("Getting user info for token: {}", token);
         return userService.info(token);
+    }
+
+    @POST
+    @Path("logout")
+    @NeedToBeAuthenticated
+    public void logout(@NotNull @QueryParam("token") String token) {
+        log.info("Logging out user with token: {}", token);
+        userService.logout(token);
     }
 
     @POST
@@ -39,12 +51,5 @@ public class UserController {
     public void register(@RequestBody UserCreationDTO user) {
         log.info("Registering user: {}", user);
         userService.register(user);
-    }
-
-    @POST
-    @Path("logout")
-    public void logout(@NotNull @QueryParam("token") String token) {
-        log.info("Logging out user with token: {}", token);
-        userService.logout(token);
     }
 }

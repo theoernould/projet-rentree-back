@@ -17,19 +17,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private static final Map<String, User> users = new HashMap<>();
+    public static final Map<String, User> users = new HashMap<>();
     private static final Double BEGIN_BALANCE = 100.0;
 
     private final UserRepository userRepository;
 
     public User info(String token) {
-        return getUserFromTokenAndThrowExceptionIfNotAuthenticated(token);
-    }
-
-    public User getUserFromTokenAndThrowExceptionIfNotAuthenticated(String token) {
-        if (!UserService.users.containsKey(token)) {
-            throw new UserNotAuthenticatedException();
-        }
         return UserService.users.get(token);
     }
 
@@ -58,9 +51,6 @@ public class UserService {
     }
 
     public void logout(String token) {
-        if (!UserService.users.containsKey(token)) {
-            throw new UserNotAuthenticatedException();
-        }
         UserService.users.remove(token);
     }
 }
