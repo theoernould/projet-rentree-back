@@ -12,20 +12,20 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class UserService {
     private static final Map<String, User> users = new HashMap<>();
     private static final Double BEGIN_BALANCE = 100.0;
 
     private final UserRepository userRepository;
 
     public User info(String token) {
-        return AuthService.users.get(token);
+        return UserService.users.get(token);
     }
 
     public String login(String email, String password) {
         if (userRepository.existsByEmailAndPassword(email, password)) {
             String token = UUID.randomUUID().toString();
-            AuthService.users.put(token, userRepository.findByEmailAndPassword(email, password));
+            UserService.users.put(token, userRepository.findByEmailAndPassword(email, password));
             return token;
         } else {
             return null;
@@ -35,11 +35,11 @@ public class AuthService {
     public String register(UserCreationDTO userToCreate) {
         String id = UUID.randomUUID().toString();
 
-        AuthService.users.put(id, userRepository.save(userToCreate.toUser(BEGIN_BALANCE)));
+        UserService.users.put(id, userRepository.save(userToCreate.toUser(BEGIN_BALANCE)));
         return id;
     }
 
     public void logout(String token) {
-        AuthService.users.remove(token);
+        UserService.users.remove(token);
     }
 }

@@ -1,6 +1,6 @@
 package imt.projetrentree.projet.config;
 
-import imt.projetrentree.projet.controllers.AuthController;
+import imt.projetrentree.projet.controllers.UserController;
 import jakarta.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class JerseyConfig extends ResourceConfig {
         property("jersey.config.server.port", jerseyPort);
 
         // Utilisez getResource pour obtenir le chemin relatif à votre classe JerseyConfig
-        String basePackage = AuthController.class.getPackage().getName();
+        String basePackage = UserController.class.getPackage().getName();
 
         // Ajoutez le chemin relatif à votre package de contrôleurs
         packages(basePackage);

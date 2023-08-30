@@ -32,7 +32,7 @@ public class DishController {
 
     @GET
     @Produces("application/json")
-    @Path("{id}")
+    @Path("/{id}")
     public Dish getDishById(@NotNull @PathParam("id") final Long id){
         Optional<Dish> l = dishRepository.findById(id);
         return l.orElse(null);
