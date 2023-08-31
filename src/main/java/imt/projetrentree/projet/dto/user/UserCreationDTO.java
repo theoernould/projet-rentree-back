@@ -1,9 +1,11 @@
 package imt.projetrentree.projet.dto.user;
 
 import imt.projetrentree.projet.models.User;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserCreationDTO {
     String email;
     String password;
