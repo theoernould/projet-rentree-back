@@ -21,8 +21,8 @@ public class DishController {
 
     @GET
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@QueryParam("ids") String ids) {
-        return dishService.getDishesByIds(ids);
+    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm,@QueryParam("lowerprice") String lowerPrice,@QueryParam("upperprice") String upperPrice,@QueryParam("diets") String diets,@QueryParam("tags") String tags) {
+        return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags);
     }
 
     @GET

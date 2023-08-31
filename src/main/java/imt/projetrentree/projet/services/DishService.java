@@ -1,8 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
-import imt.projetrentree.projet.exceptions.dish.DishNegativePriceException;
-import imt.projetrentree.projet.exceptions.dish.DishNotFoundException;
+import imt.projetrentree.projet.exceptions.dish.*;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
@@ -23,20 +22,66 @@ public class DishService {
         return d.get();
     }
 
-    public List<Dish> getDishesByIds(String ids) {
-        if (ids == null || ids.isEmpty()) {
-            return dishRepository.findAll();
-        }
-        List<Long> idsList = new ArrayList<>(List.of(ids.split(","))).stream().map(s -> {
-            try {
-                return Long.parseLong(s);
-            } catch (NumberFormatException e) {
-                throw new DishNotFoundException(s);
+    public List<Dish> getDishes(String searchTerm, String lowerPrice, String upperPrice, String diets, String tags) {
+        Double lowerPriceDouble = null;
+        if (lowerPrice == null || lowerPrice.isBlank()){
+            lowerPriceDouble = Double.MIN_VALUE;
+        }else{
+            try{
+                lowerPriceDouble = Double.parseDouble(lowerPrice);
+                if (lowerPriceDouble < 0) throw new DishNegativePriceException();
+            } catch (NumberFormatException ex) {
+                throw new DishPriceFormatException(lowerPrice);
             }
-        }).toList();
+        }
 
+        Double upperPriceDouble = null;
+        if (upperPrice == null || upperPrice.isBlank()){
+            upperPriceDouble=Double.MAX_VALUE;
+        }else{
+            try{
+                upperPriceDouble = Double.parseDouble(upperPrice);
+                if (upperPriceDouble < 0) throw new DishNegativePriceException();
+            } catch (NumberFormatException ex) {
+                throw new DishPriceFormatException(upperPrice);
+            }
+        }
 
-        return dishRepository.findAllById(idsList);
+        List<DishDiet> dietsList;
+        if (diets == null || diets.isBlank()){
+            dietsList = new ArrayList<>(Arrays.asList(DishDiet.values()));
+        }else{
+            dietsList = new ArrayList<>(List.of(diets.split(","))).stream().map(s -> {
+                try {
+                    return DishDiet.valueOf(s.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new DishDietDoesNotExistException(s);
+                }
+            }).toList();
+        }
+
+        List<DishTag> tagsList;
+        if (tags == null || tags.isBlank()){
+            tagsList = new ArrayList<>();
+        }else {
+            tagsList = new ArrayList<>(List.of(tags.split(","))).stream().map(s -> {
+                try {
+                    return DishTag.valueOf(s.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new DishTagDoesNotExistException(s);
+                }
+            }).toList();
+        }
+
+        List<Dish> dishes = dishRepository.findAll();
+        if (searchTerm!=null && !searchTerm.isBlank()) dishes.removeIf(dish -> !dish.getName().toUpperCase().contains(searchTerm.toUpperCase()));
+        Double finalLowerPriceDouble = lowerPriceDouble;
+        dishes.removeIf(dish -> dish.getPrice() < finalLowerPriceDouble);
+        Double finalUpperPriceDouble = upperPriceDouble;
+        dishes.removeIf(dish -> dish.getPrice() > finalUpperPriceDouble);
+        dishes.removeIf(dish -> !dietsList.contains(dish.getDiet()));
+        dishes.removeIf(dish -> !new HashSet<>(dish.getTags()).containsAll(tagsList));
+        return dishes;
     }
 
     public Map<DishDiet,String> getDiets(){
