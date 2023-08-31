@@ -11,7 +11,9 @@ import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Path("dishes")
@@ -20,12 +22,12 @@ public class DishController {
     @Autowired
     private DishRepository dishRepository;
 
-    @GET
+    /*@GET
     @Produces("application/json")
     public Dish[] getAllDish() {
         List<Dish> dishes = dishRepository.findAll();
         return dishes.toArray(new Dish[0]);
-    }
+    }*/
 
     @GET
     @Produces("application/json")
@@ -34,6 +36,25 @@ public class DishController {
         Optional<Dish> d = dishRepository.findById(id);
         if (d.isEmpty()) throw new DishNotFoundException();
         return d.get();
+    }
+
+    @GET
+    @Produces("application/json")
+    public List<Dish> getDishesByIds(@QueryParam("ids") String ids) {
+        if (ids == null || ids.isEmpty()){
+            return dishRepository.findAll();
+        }
+        List<Long> idsList = new ArrayList<>(List.of(ids.split(","))).stream().map(s -> {
+            try {
+                return Long.parseLong(s);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }).filter(Objects::nonNull).toList();
+
+
+        List<Dish> dishes = dishRepository.findAllById(idsList);
+        return dishes;
     }
 
     @POST

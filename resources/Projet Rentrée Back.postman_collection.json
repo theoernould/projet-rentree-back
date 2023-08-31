@@ -156,6 +156,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetMultipleDishesById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
