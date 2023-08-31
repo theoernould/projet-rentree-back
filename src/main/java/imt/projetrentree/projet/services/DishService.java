@@ -4,6 +4,7 @@ import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.exceptions.dish.*;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
+import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class DishService {
         return d.get();
     }
 
-    public List<Dish> getDishes(String searchTerm, String lowerPrice, String upperPrice, String diets, String tags) {
+    public List<Dish> getDishes(String searchTerm, String lowerPrice, String upperPrice, String diets, String tags, String sortby, String sortorder) {
         Double lowerPriceDouble = null;
         if (lowerPrice == null || lowerPrice.isBlank()){
             lowerPriceDouble = Double.MIN_VALUE;
@@ -96,6 +97,14 @@ public class DishService {
         Map<DishTag,String> map = new HashMap<>();
         for (DishTag dishtag : DishTag.values()) {
             map.put(dishtag, dishtag.getLabel());
+        }
+        return map;
+    }
+
+    public Map<DishSortingMethod,String> getSortingMethods(){
+        Map<DishSortingMethod,String> map = new HashMap<>();
+        for (DishSortingMethod dishSortingMethod : DishSortingMethod.values()) {
+            map.put(dishSortingMethod, dishSortingMethod.getLabel());
         }
         return map;
     }

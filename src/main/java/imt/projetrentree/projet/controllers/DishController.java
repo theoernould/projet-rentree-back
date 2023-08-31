@@ -3,6 +3,7 @@ package imt.projetrentree.projet.controllers;
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
+import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.services.DishService;
 import jakarta.validation.constraints.NotNull;
@@ -21,8 +22,15 @@ public class DishController {
 
     @GET
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm,@QueryParam("lowerprice") String lowerPrice,@QueryParam("upperprice") String upperPrice,@QueryParam("diets") String diets,@QueryParam("tags") String tags) {
-        return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags);
+    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm,@QueryParam("lowerprice") String lowerPrice,@QueryParam("upperprice") String upperPrice,@QueryParam("diets") String diets,@QueryParam("tags") String tags, @QueryParam("sortby") String sortby,@QueryParam("sortorder") String sortorder) {
+        return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags, sortby, sortorder);
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/sortingmethods")
+    public Map<DishSortingMethod,String> getDishSortingMethods() {
+        return dishService.getSortingMethods();
     }
 
     @GET
