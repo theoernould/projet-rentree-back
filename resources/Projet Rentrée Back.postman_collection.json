@@ -15,14 +15,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/dishes",
-							"protocol": "http",
+							"raw": "{{base_url}}/dishes",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"dishes"
 							]
 						}
@@ -191,7 +188,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"noe.delcroix59@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"raw": "{\r\n    \"email\":\"user\",\r\n    \"password\":\"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -396,7 +393,7 @@
 	"variable": [
 		{
 			"key": "user_token",
-			"value": "bb9f5c65-0fd5-4cfc-944d-83971a51951b"
+			"value": "a18247d9-cbad-49b9-a7e5-a656caecde4e"
 		},
 		{
 			"key": "base_url",

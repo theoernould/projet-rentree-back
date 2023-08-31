@@ -5,6 +5,7 @@ import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.Diet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
+import imt.projetrentree.projet.repositories.UserRepository;
 import imt.projetrentree.projet.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ProjetApplication {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetApplication.class, args);
@@ -38,14 +42,19 @@ public class ProjetApplication {
 		saveDishIfNotExists("BBQ Ribs","https://tequilasrestaurant.co.uk/wp-content/uploads/2023/07/sauced-pork-ribs-on-a-baoking-sheet.jpg", "Slow-cooked pork ribs slathered in smoky barbecue sauce.", 16.99, List.of(DishTag.MEAT), Diet.NORMAL);
 		saveDishIfNotExists("Chocolate Lava Cake","https://gimmedelicious.com/wp-content/uploads/2020/01/Chocolate-Molten-Lava-Cakes-10.jpg", "Warm chocolate cake with a gooey molten center, topped with vanilla ice cream.", 7.50, List.of(DishTag.MEAT), Diet.NORMAL);
 
-		UserCreationDTO user = UserCreationDTO.builder()
-				.email("user")
-				.password("user")
-				.firstname("firstname")
-				.lastname("lastname")
-				.build();
+		saveUserIfNotExists("user", "user", "firstname", "lastname");
+	}
 
-		userService.register(user);
+	private void saveUserIfNotExists(String email, String password, String firstname, String lastname) {
+		if (!userRepository.existsByEmail(email)) {
+			UserCreationDTO user = UserCreationDTO.builder()
+					.email(email)
+					.password(password)
+					.firstname(firstname)
+					.lastname(lastname)
+					.build();
+			userService.register(user,10000);
+		}
 	}
 
 	private void saveDishIfNotExists(String name, String image, String description, double price, List<DishTag> dishTags, Diet diet) {

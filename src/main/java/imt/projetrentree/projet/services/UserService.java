@@ -45,11 +45,15 @@ public class UserService {
         }
     }
 
-    public void register(UserCreationDTO userToCreate) {
+    public void register(UserCreationDTO userToCreate){
+        register(userToCreate, BEGIN_BALANCE);
+    }
+
+    public void register(UserCreationDTO userToCreate,double balance) {
         if (userRepository.existsByEmail(userToCreate.getEmail())) {
             throw new EmailAlreadyUsedException();
         }
-        userRepository.save(userToCreate.toUser(BEGIN_BALANCE));
+        userRepository.save(userToCreate.toUser(balance));
     }
 
     public void logout() {
