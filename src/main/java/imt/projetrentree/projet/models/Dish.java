@@ -1,6 +1,6 @@
 package imt.projetrentree.projet.models;
 
-import imt.projetrentree.projet.models.enums.Diet;
+import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +26,6 @@ public class Dish {
     String alergens;
     String image;
     List<DishTag> tags;
-    Diet diet;
+    DishDiet diet;
     Double price;
 }

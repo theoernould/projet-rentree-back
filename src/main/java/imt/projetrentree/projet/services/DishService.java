@@ -1,18 +1,15 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
-import imt.projetrentree.projet.exceptions.dish.DishDietDoesNotExistException;
 import imt.projetrentree.projet.exceptions.dish.DishNotFoundException;
 import imt.projetrentree.projet.models.Dish;
-import imt.projetrentree.projet.models.enums.Diet;
+import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +38,23 @@ public class DishService {
         return dishRepository.findAllById(idsList);
     }
 
-    public void createDish(DishCreationDTO dish) {
+    public Map<DishDiet,String> getDiets(){
+        Map<DishDiet,String> map = new HashMap<>();
+        for (DishDiet dishDiet : DishDiet.values()) {
+            map.put(dishDiet, dishDiet.getLabel());
+        }
+        return map;
+    }
 
+    public Map<DishTag,String> getDishTags(){
+        Map<DishTag,String> map = new HashMap<>();
+        for (DishTag dishtag : DishTag.values()) {
+            map.put(dishtag, dishtag.getLabel());
+        }
+        return map;
+    }
+
+    public void createDish(DishCreationDTO dish) {
         dishRepository.save(dish.toDish());
     }
 
@@ -80,8 +92,6 @@ public class DishService {
 
         dishRepository.save(existingDish);
     }
-
-
 
     public void deleteDish(Long id) {
         Optional<Dish> d = dishRepository.findById(id);

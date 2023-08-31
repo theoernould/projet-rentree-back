@@ -3,8 +3,10 @@ package imt.projetrentree.projet.dto.dish;
 import imt.projetrentree.projet.exceptions.dish.DishDietDoesNotExistException;
 import imt.projetrentree.projet.exceptions.dish.DishTagDoesNotExistException;
 import imt.projetrentree.projet.models.Dish;
-import imt.projetrentree.projet.models.enums.Diet;
+import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,6 +22,9 @@ public class DishCreationDTO {
     String image;
     List<String> tags;
     String diet;
+
+    @NotNull(message = "Price is mandatory")
+    @PositiveOrZero(message = "Price must be positive or zero")
     Double price;
 
     public Dish toDish() {
@@ -34,10 +39,10 @@ public class DishCreationDTO {
                 .build();
     }
 
-    public Diet ifDietNotExistThrow(String diet) {
+    public DishDiet ifDietNotExistThrow(String diet) {
         if (diet == null || diet.isEmpty()) throw new DishDietDoesNotExistException("null");
         try{
-            return Diet.valueOf(diet);
+            return DishDiet.valueOf(diet);
         } catch (IllegalArgumentException e){
             throw new DishDietDoesNotExistException(diet);
         }

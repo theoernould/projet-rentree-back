@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class DishTagDoesNotExistException extends WebApplicationException {
     public DishTagDoesNotExistException(String tag){
-        super(Response.status(Response.Status.BAD_REQUEST)
+        super(Response.status(Response.Status.NOT_FOUND)
                 .entity("The dish tag "+tag+" does not exist. Valid categories are : "+ Arrays.toString(DishTag.values()))
                 .build());
     }

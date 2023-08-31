@@ -2,7 +2,7 @@ package imt.projetrentree.projet.controllers;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.models.Dish;
-import imt.projetrentree.projet.models.enums.Diet;
+import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.services.DishService;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +10,6 @@ import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,23 +28,15 @@ public class DishController {
     @GET
     @Produces("application/json")
     @Path("/diets")
-    public Map<Diet,String> getDishDiets() {
-        Map<Diet,String> map = new HashMap<>();
-        for (Diet diet : Diet.values()) {
-            map.put(diet, diet.getLabel());
-        }
-        return map;
+    public Map<DishDiet,String> getDishDiets() {
+        return dishService.getDiets();  
     }
 
     @GET
     @Produces("application/json")
     @Path("/tags")
     public Map<DishTag,String> getDishTags() {
-        Map<DishTag,String> map = new HashMap<>();
-        for (DishTag dishtag : DishTag.values()) {
-            map.put(dishtag, dishtag.getLabel());
-        }
-        return map;
+        return dishService.getDishTags();
     }
 
     @GET
