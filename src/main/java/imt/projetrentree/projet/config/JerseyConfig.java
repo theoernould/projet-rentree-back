@@ -20,6 +20,9 @@ public class JerseyConfig extends ResourceConfig {
         // Définissez le port pour Jersey
         property("jersey.config.server.port", jerseyPort);
 
+        // allow all cors
+        register(CORSFilter.class);
+
         // Ajoutez le chemin relatif à votre package de contrôleurs
         packages("imt.projetrentree.projet.controllers");
 
