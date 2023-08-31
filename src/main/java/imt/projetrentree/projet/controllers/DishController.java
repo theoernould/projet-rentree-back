@@ -22,13 +22,6 @@ public class DishController {
     @Autowired
     private DishRepository dishRepository;
 
-    /*@GET
-    @Produces("application/json")
-    public Dish[] getAllDish() {
-        List<Dish> dishes = dishRepository.findAll();
-        return dishes.toArray(new Dish[0]);
-    }*/
-
     @GET
     @Produces("application/json")
     @Path("/{id}")
@@ -48,13 +41,12 @@ public class DishController {
             try {
                 return Long.parseLong(s);
             } catch (NumberFormatException e) {
-                return null;
+                throw new DishNotFoundException(s);
             }
-        }).filter(Objects::nonNull).toList();
+        }).toList();
 
 
-        List<Dish> dishes = dishRepository.findAllById(idsList);
-        return dishes;
+        return dishRepository.findAllById(idsList);
     }
 
     @POST
