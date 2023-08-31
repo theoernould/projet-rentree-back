@@ -228,7 +228,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/users/info?token=933f7846-22f0-43e4-a6c9-9dabf71fe144",
+							"raw": "http://localhost:8080/api/users/info?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -242,7 +242,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "933f7846-22f0-43e4-a6c9-9dabf71fe144"
+									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
 								}
 							]
 						}
@@ -270,6 +270,99 @@
 								{
 									"key": "token",
 									"value": "933f7846-22f0-43e4-a6c9-9dabf71fe144"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "GetAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderContent\":{\r\n        \"3\":1,\r\n        \"4\":2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrderDetail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/1?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"1"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
 								}
 							]
 						}
