@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"un plat\",\r\n    \"description\":\"c'est un bon plat\",\r\n    \"alergens\":\"liste des alergens\",\r\n    \"tags\":[\"VEGETABLES\",\"FISH\"],\r\n    \"diet\":\"VEGAN\",\r\n    \"image\":\"\",\r\n    \"price\":15.23\r\n}",
+							"raw": "{\r\n    \"name\":\"un plat\",\r\n    \"description\":\"c'est un bon plat\",\r\n    \"alergens\":\"liste des alergens\",\r\n    \"tags\":[\"VEGETABLE\",\"FISH\"],\r\n    \"diet\":\"VEGAN\",\r\n    \"image\":\"\",\r\n    \"price\":25.12\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

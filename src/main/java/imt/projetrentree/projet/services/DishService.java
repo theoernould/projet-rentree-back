@@ -1,6 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
+import imt.projetrentree.projet.exceptions.dish.DishNegativePriceException;
 import imt.projetrentree.projet.exceptions.dish.DishNotFoundException;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
@@ -55,10 +56,12 @@ public class DishService {
     }
 
     public void createDish(DishCreationDTO dish) {
+        if (dish.getPrice()<0) throw new DishNegativePriceException();
         dishRepository.save(dish.toDish());
     }
 
     public void updateDish(Long id, DishCreationDTO updatedCreationDish) {
+        if (updatedCreationDish.getPrice()<0) throw new DishNegativePriceException();
         Optional<Dish> optionalDish = dishRepository.findById(id);
         if (optionalDish.isEmpty()) {
             throw new DishNotFoundException();
