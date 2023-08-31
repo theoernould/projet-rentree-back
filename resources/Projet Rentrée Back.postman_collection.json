@@ -44,14 +44,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/dishes",
-							"protocol": "http",
+							"raw": "{{base_url}}/dishes",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"dishes"
 							],
 							"query": [
@@ -91,14 +88,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/dishes/2",
-							"protocol": "http",
+							"raw": "{{base_url}}/dishes/2",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"dishes",
 								"2"
 							]
@@ -112,14 +106,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/dishes/2",
-							"protocol": "http",
+							"raw": "{{base_url}}/dishes/2",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"dishes",
 								"2"
 							]
@@ -134,7 +125,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"zgueg\",\r\n    \"description\":\"zgueg\",\r\n    \"category\":\"meat\",\r\n    \"image\":\"zedzeduizedz\",\r\n    \"price\":69.69\r\n}",
+							"raw": "{\r\n    \"name\":\"Plat\",\r\n    \"description\":\"description\",\r\n    \"category\":\"meat\",\r\n    \"image\":\"url\",\r\n    \"price\":4.20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,14 +133,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/dishes/6",
-							"protocol": "http",
+							"raw": "{{base_url}}/dishes/6",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"dishes",
 								"6"
 							]
@@ -161,7 +149,22 @@
 					"name": "GetMultipleDishesById",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dishes?ids=3,78",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dishes"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "3,78"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -172,6 +175,17 @@
 			"item": [
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -185,14 +199,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/login",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/login",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"users",
 								"login"
 							]
@@ -215,14 +226,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/register",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/register",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"users",
 								"register"
 							]
@@ -234,24 +242,21 @@
 					"name": "GetUserInfo",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/api/users/info?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/info",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"users",
 								"info"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
-								}
 							]
 						}
 					},
@@ -261,24 +266,21 @@
 					"name": "Logout",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/api/users/logout?token=933f7846-22f0-43e4-a6c9-9dabf71fe144",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/logout",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"users",
 								"logout"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "933f7846-22f0-43e4-a6c9-9dabf71fe144"
-								}
 							]
 						}
 					},
@@ -293,23 +295,20 @@
 					"name": "GetAllOrders",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/api/orders?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
-							"protocol": "http",
+							"raw": "{{base_url}}/orders",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"orders"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
-								}
 							]
 						}
 					},
@@ -319,7 +318,13 @@
 					"name": "AddOrder",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"orderContent\":{\r\n        \"3\":1,\r\n        \"4\":2\r\n    }\r\n}",
@@ -330,21 +335,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/orders?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
-							"protocol": "http",
+							"raw": "{{base_url}}/orders",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"orders"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
-								}
 							]
 						}
 					},
@@ -354,30 +350,58 @@
 					"name": "GetOrderDetail",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/api/orders/1?token=3d6bf9b6-745e-42a1-9b13-23d455724227",
-							"protocol": "http",
+							"raw": "{{base_url}}/orders/1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"orders",
 								"1"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "3d6bf9b6-745e-42a1-9b13-23d455724227"
-								}
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_token",
+			"value": "bb9f5c65-0fd5-4cfc-944d-83971a51951b"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api",
+			"type": "string"
 		}
 	]
 }

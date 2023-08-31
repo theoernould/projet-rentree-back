@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NeedToBeAuthenticated {
-    String tokenParamName() default "token";
+    String tokenHeaderName() default "token";
 }
