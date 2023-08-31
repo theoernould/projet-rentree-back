@@ -1,8 +1,10 @@
 package imt.projetrentree.projet.models.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum DishTag {
     MEAT("Meat"),
     FISH("Fish"),

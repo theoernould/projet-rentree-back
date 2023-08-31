@@ -164,6 +164,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetDiets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dishes/diets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dishes",
+								"diets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dishes/tags",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dishes",
+								"tags"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
