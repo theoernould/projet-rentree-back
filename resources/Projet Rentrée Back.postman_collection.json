@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"un plat\",\r\n    \"description\":\"c'est un bon plat\",\r\n    \"category\":\"healthy\",\r\n    \"image\":\"\",\r\n    \"price\":15.23\r\n}",
+							"raw": "{\r\n    \"name\":\"un plat\",\r\n    \"description\":\"c'est un bon plat\",\r\n    \"alergens\":\"liste des alergens\",\r\n    \"tags\":[\"VEGETABLES\",\"FISH\"],\r\n    \"diet\":\"VEGAN\",\r\n    \"image\":\"\",\r\n    \"price\":15.23\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,13 +85,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/dishes/2",
+							"raw": "{{base_url}}/dishes/13",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"dishes",
-								"2"
+								"13"
 							]
 						}
 					},
@@ -122,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Plat\",\r\n    \"description\":\"description\",\r\n    \"category\":\"meat\",\r\n    \"image\":\"url\",\r\n    \"price\":4.20\r\n}",
+							"raw": "{\r\n    \"name\":\"plat modifié\",\r\n    \"description\":\"il est modifié\",\r\n    \"alergens\":\"autres alergens\",\r\n    \"tags\":[\"HEALTHY\"],\r\n    \"diet\":\"OTHER\",\r\n    \"image\":\"\",\r\n    \"price\":15.23\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,7 +148,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/dishes?ids=3,78",
+							"raw": "{{base_url}}/dishes?ids=3,2",
 							"host": [
 								"{{base_url}}"
 							],
@@ -158,7 +158,7 @@
 							"query": [
 								{
 									"key": "ids",
-									"value": "3,78"
+									"value": "3,2"
 								}
 							]
 						}
@@ -393,7 +393,7 @@
 	"variable": [
 		{
 			"key": "user_token",
-			"value": "a18247d9-cbad-49b9-a7e5-a656caecde4e"
+			"value": "ddac549a-2a05-429f-bf12-65da601d1bca"
 		},
 		{
 			"key": "base_url",

@@ -6,10 +6,10 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.Arrays;
 
-public class DishCategoryDoesNotExistException extends WebApplicationException {
-    public DishCategoryDoesNotExistException(String category){
+public class DishTagDoesNotExistException extends WebApplicationException {
+    public DishTagDoesNotExistException(String tag){
         super(Response.status(Response.Status.BAD_REQUEST)
-                .entity("The dish category "+category+" does not exist. Valid categories are : "+ Arrays.toString(DishTag.values()))
+                .entity("The dish tag "+tag+" does not exist. Valid categories are : "+ Arrays.toString(DishTag.values()))
                 .build());
     }
 }

@@ -1,9 +1,10 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
-import imt.projetrentree.projet.exceptions.dish.DishCategoryDoesNotExistException;
+import imt.projetrentree.projet.exceptions.dish.DishDietDoesNotExistException;
 import imt.projetrentree.projet.exceptions.dish.DishNotFoundException;
 import imt.projetrentree.projet.models.Dish;
+import imt.projetrentree.projet.models.enums.Diet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +42,11 @@ public class DishService {
     }
 
     public void createDish(DishCreationDTO dish) {
+
         dishRepository.save(dish.toDish());
     }
 
-    public void updateDish(Long id, DishCreationDTO updatedDish) {
+    public void updateDish(Long id, DishCreationDTO updatedCreationDish) {
         Optional<Dish> optionalDish = dishRepository.findById(id);
         if (optionalDish.isEmpty()) {
             throw new DishNotFoundException();
@@ -52,11 +54,16 @@ public class DishService {
 
         Dish existingDish = optionalDish.get();
 
+        Dish updatedDish = updatedCreationDish.toDish();
+
         if (updatedDish.getName() != null) {
             existingDish.setName(updatedDish.getName());
         }
         if (updatedDish.getDescription() != null) {
             existingDish.setDescription(updatedDish.getDescription());
+        }
+        if (updatedDish.getAlergens() != null) {
+            existingDish.setAlergens(updatedDish.getAlergens());
         }
         if (updatedDish.getImage() != null) {
             existingDish.setImage(updatedDish.getImage());
@@ -73,6 +80,8 @@ public class DishService {
 
         dishRepository.save(existingDish);
     }
+
+
 
     public void deleteDish(Long id) {
         Optional<Dish> d = dishRepository.findById(id);

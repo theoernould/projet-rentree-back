@@ -23,6 +23,7 @@ public class Dish {
 
     String name;
     String description;
+    String alergens;
     String image;
     List<DishTag> tags;
     Diet diet;
