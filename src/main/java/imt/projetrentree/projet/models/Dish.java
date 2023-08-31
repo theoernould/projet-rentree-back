@@ -1,10 +1,14 @@
 package imt.projetrentree.projet.models;
 
+import imt.projetrentree.projet.models.enums.Diet;
+import imt.projetrentree.projet.models.enums.DishTag;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "dishes")
@@ -20,6 +24,7 @@ public class Dish {
     String name;
     String description;
     String image;
-    String category;
+    List<DishTag> tags;
+    Diet diet;
     Double price;
 }

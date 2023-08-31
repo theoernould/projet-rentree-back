@@ -4,14 +4,10 @@ import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.exceptions.dish.DishCategoryDoesNotExistException;
 import imt.projetrentree.projet.exceptions.dish.DishNotFoundException;
 import imt.projetrentree.projet.models.Dish;
-import imt.projetrentree.projet.models.DishCategory;
+import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
-import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +41,7 @@ public class DishService {
     }
 
     public void createDish(DishCreationDTO dish) {
-        categoryNotExistsThenThrowException(dish.getCategory());
         dishRepository.save(dish.toDish());
-    }
-
-    private void categoryNotExistsThenThrowException(String category) {
-        for (DishCategory c : DishCategory.values()) {
-            if (c.toString().equals(category.toUpperCase())) return;
-        }
-        throw new DishCategoryDoesNotExistException(category);
     }
 
     public void updateDish(Long id, DishCreationDTO updatedDish) {
@@ -61,24 +49,26 @@ public class DishService {
         if (optionalDish.isEmpty()) {
             throw new DishNotFoundException();
         }
-        categoryNotExistsThenThrowException(updatedDish.getCategory());
 
         Dish existingDish = optionalDish.get();
 
         if (updatedDish.getName() != null) {
             existingDish.setName(updatedDish.getName());
         }
-        if (updatedDish.getPrice() != null) {
-            existingDish.setPrice(updatedDish.getPrice());
-        }
-        if (updatedDish.getCategory() != null) {
-            existingDish.setCategory(updatedDish.getCategory());
-        }
         if (updatedDish.getDescription() != null) {
             existingDish.setDescription(updatedDish.getDescription());
         }
         if (updatedDish.getImage() != null) {
             existingDish.setImage(updatedDish.getImage());
+        }
+        if (updatedDish.getDiet() != null) {
+            existingDish.setDiet(updatedDish.getDiet());
+        }
+        if (updatedDish.getTags() != null) {
+            existingDish.setTags(updatedDish.getTags());
+        }
+        if (updatedDish.getPrice() != null) {
+            existingDish.setPrice(updatedDish.getPrice());
         }
 
         dishRepository.save(existingDish);
