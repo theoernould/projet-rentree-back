@@ -37,7 +37,7 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationDateTime;
 
-    private Double getTotalPrice() {
+    public Double getTotalPrice() {
         return dishesWithQuantities.entrySet().stream()
                 .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();

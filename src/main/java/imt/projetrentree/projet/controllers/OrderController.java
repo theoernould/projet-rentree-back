@@ -29,9 +29,9 @@ public class OrderController {
     @NeedToBeAuthenticated
     @Produces("application/json")
     @Transactional
-    public List<OrderDTO> getOrdersOfUser() {
+    public List<OrderDTO> getOrdersOfUser(@QueryParam("sortingMethod") @DefaultValue("DATE") String sortingMethod, @QueryParam("sortingOrder") @DefaultValue("ASC") String sortingOrder) {
         User user = userService.getCurrentUser();
-        return orderService.getOrders(user).stream().map(Order::toDTO).toList();
+        return orderService.getOrders(user, sortingMethod, sortingOrder).stream().map(Order::toDTO).toList();
     }
 
     @GET
