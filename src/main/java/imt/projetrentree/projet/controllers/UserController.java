@@ -41,6 +41,13 @@ public class UserController {
     }
 
     @POST
+    @Path("resetpasswordmail")
+    @Consumes("application/json")
+    public void resetPassword(@QueryParam("email") String email) {
+        userService.resetPasswordSendMail(email);
+    }
+
+    @POST
     @Path("register")
     @Consumes("application/json")
     public void register(@RequestBody UserCreationDTO user) {

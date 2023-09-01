@@ -12,7 +12,7 @@
 				{
 					"name": "GetAllDishes",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
 							"raw": "{{base_url}}/dishes",
@@ -268,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user\",\r\n    \"password\":\"user\"\r\n}",
+							"raw": "{\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,6 +358,30 @@
 							"path": [
 								"users",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ResetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/resetpasswordmail?email=noe.delcroix59@gmail.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"resetpasswordmail"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "noe.delcroix59@gmail.com"
+								}
 							]
 						}
 					},
@@ -482,6 +506,14 @@
 						"sortingorders"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "mailtest",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
