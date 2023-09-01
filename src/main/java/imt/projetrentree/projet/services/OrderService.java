@@ -1,6 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.order.OrderCreationDTO;
+import imt.projetrentree.projet.exceptions.dish.InvalidOrderSortingMethodException;
 import imt.projetrentree.projet.exceptions.order.DishDoesNotExistException;
 import imt.projetrentree.projet.exceptions.order.NotEnoughMoneyException;
 import imt.projetrentree.projet.exceptions.order.OrderNotFoundException;
@@ -8,6 +9,7 @@ import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.Order;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.models.enums.OrderSortingMethod;
+import imt.projetrentree.projet.models.enums.SortingOrder;
 import imt.projetrentree.projet.repositories.DishRepository;
 import imt.projetrentree.projet.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -75,8 +77,27 @@ public class OrderService {
         return totalPrice;
     }
 
-    public List<Order> getOrders(User user) {
-        return orderRepository.findAllByUserId(user.getId());
+    public List<Order> getOrders(User user, String sortingMethodStr, String sortingOrderStr) {
+        OrderSortingMethod orderSortingMethod;
+        try {
+            orderSortingMethod = OrderSortingMethod.valueOf(sortingMethodStr);
+        } catch (Exception e) {
+            throw new InvalidOrderSortingMethodException(sortingMethodStr);
+        }
+        SortingOrder sortingOrder;
+        try {
+            sortingOrder = SortingOrder.valueOf(sortingOrderStr);
+        } catch (Exception e) {
+            throw new InvalidOrderSortingMethodException(sortingOrderStr);
+        }
+        List<Order> orders = orderRepository.findAllByUserId(user.getId());
+        if (orderSortingMethod == OrderSortingMethod.DATE) {
+            orders.sort((o1, o2) -> sortingOrder == SortingOrder.ASC ? o1.getCreationDateTime().compareTo(o2.getCreationDateTime()) : o2.getCreationDateTime().compareTo(o1.getCreationDateTime()));
+            return orders;
+        } else {
+            orders.sort((o1, o2) -> sortingOrder == SortingOrder.ASC ? Double.compare(o1.getTotalPrice(), o2.getTotalPrice()) : Double.compare(o2.getTotalPrice(), o1.getTotalPrice()));
+            return orders;
+        }
     }
 
     public Order getOrderById(Long id) {

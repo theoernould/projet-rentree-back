@@ -1,6 +1,5 @@
 package imt.projetrentree.projet.models.enums;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 
 @Getter
