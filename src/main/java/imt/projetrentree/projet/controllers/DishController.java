@@ -1,11 +1,14 @@
 package imt.projetrentree.projet.controllers;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
+import imt.projetrentree.projet.dto.dish.DishFilterDTO;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.services.DishService;
+import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,11 @@ public class DishController {
     @Autowired
     private DishService dishService;
 
-    @GET
+    @POST
+    @Consumes("application/json")
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm, @QueryParam("lowerprice") String lowerPrice, @QueryParam("upperprice") String upperPrice, @QueryParam("diets") String diets, @QueryParam("tags") String tags, @QueryParam("sortby") String sortby, @QueryParam("sortorder") String sortorder) {
-        return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags, sortby, sortorder);
+    public List<Dish> getDishesByIds(@Valid @Nullable @RequestBody DishFilterDTO dishFilterDTO) {
+        return dishService.getDishes(dishFilterDTO);
     }
 
     @GET

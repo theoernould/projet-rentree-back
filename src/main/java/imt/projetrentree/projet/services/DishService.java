@@ -1,6 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
+import imt.projetrentree.projet.dto.dish.DishFilterDTO;
 import imt.projetrentree.projet.exceptions.dish.*;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
@@ -25,21 +26,16 @@ public class DishService {
         return d.get();
     }
 
-    public List<Dish> getDishes(String searchTerm, String lowerPrice, String upperPrice, String diets, String tags, String sortby, String sortorder) {
-        Double lowerPriceDouble = parseLowerPrice(lowerPrice);
-        Double upperPriceDouble = parseUpperPrice(upperPrice);
-        List<DishDiet> dietsList = parseDiets(diets);
-        List<DishTag> tagsList = parseTags(tags);
-        SortingOrder order = parseSortingOrder(sortorder);
-        DishSortingMethod sortByMethod = parseSortBy(sortby);
-
-        return dishRepository.findAll().stream()
-                .filter(dish -> searchTerm == null || dish.getName().toUpperCase().contains(searchTerm.toUpperCase()))
-                .filter(dish -> dish.getPrice() >= lowerPriceDouble && dish.getPrice() <= upperPriceDouble)
-                .filter(dish -> dietsList.contains(dish.getDiet()))
-                .filter(dish -> new HashSet<>(dish.getTags()).containsAll(tagsList))
-                .sorted(getComparator(sortByMethod, order))
-                .toList();
+    public List<Dish> getDishes(DishFilterDTO dishFilterDTO) {
+        List<Dish> dishes = dishRepository.findAll();
+        return Objects.isNull(dishFilterDTO) ? dishes : dishes.stream()
+                .filter(dish -> dish.getName().toLowerCase().contains(dishFilterDTO.getSearchText().toLowerCase()))
+                .filter(dish -> dish.getPrice() >= dishFilterDTO.getLowerPrice())
+                .filter(dish -> dish.getPrice() <= dishFilterDTO.getUpperPrice())
+                .filter(dish -> dishFilterDTO.getDiets().contains(dish.getDiet()))
+                .filter(dish -> dishFilterDTO.getTags().containsAll(dish.getTags()))
+                .sorted(getComparator(dishFilterDTO.getSortBy(), dishFilterDTO.getSortOrder()))
+                .collect(Collectors.toList());
     }
 
     private Double parseLowerPrice(String lowerPrice) {
@@ -106,17 +102,17 @@ public class DishService {
         }
     }
 
-    private Comparator<Dish> getComparator(DishSortingMethod sortby, SortingOrder order) {
+    private Comparator<Dish> getComparator(DishSortingMethod sortBy, SortingOrder order) {
         Comparator<Dish> comparator;
-        switch (sortby) {
+        switch (sortBy) {
             case NAME:
-                comparator = Comparator.comparing(Dish::getName);
+                comparator = Comparator.comparing(Dish::getName, String.CASE_INSENSITIVE_ORDER);
                 break;
             case PRICE:
                 comparator = Comparator.comparing(Dish::getPrice);
                 break;
             default:
-                throw new InvalidSortByException(sortby.getLabel());
+                throw new InvalidSortByException(sortBy.getLabel());
         }
         return order == SortingOrder.ASC ? comparator : comparator.reversed();
     }
