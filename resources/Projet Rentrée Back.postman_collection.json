@@ -148,7 +148,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/dishes?search=&lowerprice=&upperprice=&diets=&tags=",
+							"raw": "{{base_url}}/dishes?search=&lowerprice=&upperprice=&diets=&tags=&sortby&sortorder",
 							"host": [
 								"{{base_url}}"
 							],
@@ -175,6 +175,16 @@
 								{
 									"key": "tags",
 									"value": ""
+								},
+								{
+									"key": "sortby",
+									"value": null,
+									"description": "PRICE,NAME"
+								},
+								{
+									"key": "sortorder",
+									"value": null,
+									"description": "ASC, DESC"
 								}
 							]
 						}
@@ -432,6 +442,24 @@
 							"path": [
 								"orders",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSortingMethods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/orders/sortingmethods",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders",
+								"sortingmethods"
 							]
 						}
 					},
