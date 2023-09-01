@@ -5,6 +5,7 @@ import imt.projetrentree.projet.dto.user.UserCreationDTO;
 import imt.projetrentree.projet.exceptions.user.AlreadyAuthenticatedException;
 import imt.projetrentree.projet.exceptions.user.BadCredentialsException;
 import imt.projetrentree.projet.exceptions.user.EmailAlreadyUsedException;
+import imt.projetrentree.projet.exceptions.user.InvalidEmailException;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,9 @@ public class UserService {
     }
 
     public String login(String email, String password) {
+        if (!isEmailValid(email)) {
+            throw new InvalidEmailException();
+        }
         if (userRepository.existsByEmailAndPassword(email, password)) {
             User user = userRepository.findByEmailAndPassword(email, password);
             verifyThatUserIsNotAlreadyAuthenticated(user);
@@ -45,11 +49,18 @@ public class UserService {
         }
     }
 
+    private boolean isEmailValid(String email) {
+        return email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+    }
+
     public void register(UserCreationDTO userToCreate){
         register(userToCreate, BEGIN_BALANCE);
     }
 
     public void register(UserCreationDTO userToCreate,double balance) {
+        if (!isEmailValid(userToCreate.getEmail())) {
+            throw new InvalidEmailException();
+        }
         if (userRepository.existsByEmail(userToCreate.getEmail())) {
             throw new EmailAlreadyUsedException();
         }

@@ -43,7 +43,7 @@ public class ProjetApplication {
 		saveDishIfNotExists("Chocolate Lava Cake", "https://gimmedelicious.com/wp-content/uploads/2020/01/Chocolate-Molten-Lava-Cakes-10.jpg", "Warm chocolate cake with a gooey molten center, topped with vanilla ice cream.", "Contains: dairy, eggs", 7.50, List.of(DishTag.DESSERT), DishDiet.NORMAL);
 		saveDishIfNotExists("Vegan Burger", "https://img.cuisineaz.com/660x660/2016/06/07/i95896-burger-veggie-au-steak-de-pois-chiches.jpg", "Vegan burger with vegan cheese, vegan bacon, vegan mayonnaise, vegan salad, vegan tomato, vegan onion, vegan ketchup, vegan mustard, vegan pickles, vegan bread.", "Contains: none", 15.99, List.of(DishTag.VEGETABLE), DishDiet.VEGAN);
 
-		saveUserIfNotExists("user", "user", "firstname", "lastname");
+		saveUserIfNotExists("user@user.com", "user", "firstname", "lastname");
 	}
 
 	private void saveUserIfNotExists(String email, String password, String firstname, String lastname) {
