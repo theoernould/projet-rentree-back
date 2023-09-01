@@ -22,28 +22,28 @@ public class DishController {
 
     @GET
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm,@QueryParam("lowerprice") String lowerPrice,@QueryParam("upperprice") String upperPrice,@QueryParam("diets") String diets,@QueryParam("tags") String tags, @QueryParam("sortby") String sortby,@QueryParam("sortorder") String sortorder) {
+    public List<Dish> getDishesByIds(@QueryParam("search") String searchTerm, @QueryParam("lowerprice") String lowerPrice, @QueryParam("upperprice") String upperPrice, @QueryParam("diets") String diets, @QueryParam("tags") String tags, @QueryParam("sortby") String sortby, @QueryParam("sortorder") String sortorder) {
         return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags, sortby, sortorder);
     }
 
     @GET
     @Produces("application/json")
     @Path("/sortingmethods")
-    public Map<DishSortingMethod,String> getDishSortingMethods() {
+    public Map<DishSortingMethod, String> getDishSortingMethods() {
         return dishService.getSortingMethods();
     }
 
     @GET
     @Produces("application/json")
     @Path("/diets")
-    public Map<DishDiet,String> getDishDiets() {
-        return dishService.getDiets();  
+    public Map<DishDiet, String> getDishDiets() {
+        return dishService.getDiets();
     }
 
     @GET
     @Produces("application/json")
     @Path("/tags")
-    public Map<DishTag,String> getDishTags() {
+    public Map<DishTag, String> getDishTags() {
         return dishService.getDishTags();
     }
 
