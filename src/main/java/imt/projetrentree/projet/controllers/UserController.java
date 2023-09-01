@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.controllers;
 
-import imt.projetrentree.projet.config.NeedToBeAuthenticated;
+import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
 import imt.projetrentree.projet.dto.user.UserCredentialsDTO;
 import imt.projetrentree.projet.dto.user.UserCreationDTO;
 import imt.projetrentree.projet.dto.user.UserInfoDTO;
-import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.services.UserService;
-import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

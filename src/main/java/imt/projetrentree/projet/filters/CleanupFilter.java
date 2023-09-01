@@ -1,4 +1,4 @@
-package imt.projetrentree.projet.config;
+package imt.projetrentree.projet.filters;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;

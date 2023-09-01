@@ -1,5 +1,7 @@
-package imt.projetrentree.projet.config;
+package imt.projetrentree.projet.filters;
 
+import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
+import imt.projetrentree.projet.config.AuthContext;
 import imt.projetrentree.projet.services.UserService;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;

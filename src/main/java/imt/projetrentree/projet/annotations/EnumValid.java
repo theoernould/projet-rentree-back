@@ -1,4 +1,4 @@
-package imt.projetrentree.projet.config;
+package imt.projetrentree.projet.annotations;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

@@ -1,4 +1,4 @@
-package imt.projetrentree.projet.config;
+package imt.projetrentree.projet.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

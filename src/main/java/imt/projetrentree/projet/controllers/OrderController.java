@@ -1,6 +1,6 @@
 package imt.projetrentree.projet.controllers;
 
-import imt.projetrentree.projet.config.NeedToBeAuthenticated;
+import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
 import imt.projetrentree.projet.dto.order.OrderCreationDTO;
 import imt.projetrentree.projet.dto.order.OrderDTO;
 import imt.projetrentree.projet.dto.order.OrderDetailDTO;

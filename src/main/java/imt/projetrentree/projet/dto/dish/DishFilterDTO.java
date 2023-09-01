@@ -1,6 +1,6 @@
 package imt.projetrentree.projet.dto.dish;
 
-import imt.projetrentree.projet.config.EnumValid;
+import imt.projetrentree.projet.annotations.EnumValid;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;

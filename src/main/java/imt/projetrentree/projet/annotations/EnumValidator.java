@@ -1,5 +1,6 @@
-package imt.projetrentree.projet.config;
+package imt.projetrentree.projet.annotations;
 
+import imt.projetrentree.projet.annotations.EnumValid;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
