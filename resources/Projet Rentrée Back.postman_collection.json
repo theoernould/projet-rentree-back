@@ -268,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
+							"raw": "{\r\n    \"email\":\"noe.delcroix59@gmail.com\",\r\n    \"password\":\"testtest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -364,7 +364,7 @@
 					"response": []
 				},
 				{
-					"name": "ResetPassword",
+					"name": "ResetPasswordMail",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -381,6 +381,34 @@
 								{
 									"key": "email",
 									"value": "noe.delcroix59@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ResetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/resetpassword?token=d54014d7-5ffd-48f2-960e-a48efd395c92&password=testtest",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"resetpassword"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "d54014d7-5ffd-48f2-960e-a48efd395c92"
+								},
+								{
+									"key": "password",
+									"value": "testtest"
 								}
 							]
 						}
@@ -506,14 +534,6 @@
 						"sortingorders"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "mailtest",
-			"request": {
-				"method": "GET",
-				"header": []
 			},
 			"response": []
 		}

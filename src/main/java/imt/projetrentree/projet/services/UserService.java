@@ -2,12 +2,10 @@ package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.config.AuthContext;
 import imt.projetrentree.projet.dto.user.UserCreationDTO;
-import imt.projetrentree.projet.exceptions.user.AlreadyAuthenticatedException;
-import imt.projetrentree.projet.exceptions.user.BadCredentialsException;
-import imt.projetrentree.projet.exceptions.user.EmailAlreadyUsedException;
-import imt.projetrentree.projet.exceptions.user.InvalidEmailException;
+import imt.projetrentree.projet.exceptions.user.*;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.repositories.UserRepository;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +62,17 @@ public class UserService {
             emailService.sendChangePasswordEmail(token,email);
         }else{
             throw new BadCredentialsException();
+        }
+    }
+
+    public void resetPassword(String token,String password){
+        if(resetPasswordTokens.containsKey(token)){
+            String email = resetPasswordTokens.get(token);
+            User user = userRepository.findByEmail(email);
+            user.setPassword(password);
+            userRepository.save(user);
+        }else{
+            throw new EmailTokenExpiredException();
         }
     }
 
