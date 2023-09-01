@@ -1,253 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>imt.projetrentree</groupId>
-	<artifactId>projet</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>projet</name>
-	<description>Projet de rentrée de seconde année de l'IMT - FISA TI 2025</description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-tracing-bridge-brave</artifactId>
-		</dependency>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>imt.projetrentree</groupId>
+    <artifactId>projet</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>projet</name>
+    <description>Projet de rentrée de seconde année de l'IMT - FISA TI 2025</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-core</artifactId>
-			<version>3.5.9</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
-		<dependency>
-			<groupId>com.sendgrid</groupId>
-			<artifactId>sendgrid-java</artifactId>
-			<version>4.9.3</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>6.0.11</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.7</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-			<version>3.1.3</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>6.0.11</version>
-		</dependency>
-
-				<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.9.3</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-websocket -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-websocket</artifactId>
-			<version>10.1.12</version>
-		</dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-			<version>3.1.3</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.5.9</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-websocket -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>10.1.12</version>
+        </dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/jakarta.ws.rs/jakarta.ws.rs-api -->
-		<dependency>
-			<groupId>jakarta.ws.rs</groupId>
-			<artifactId>jakarta.ws.rs-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>3.1.3</version>
-		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.ws.rs/jakarta.ws.rs-api -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<version>3.1.3</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>6.0.11</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>3.1.3</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.1.3</version>
+            <scope>test</scope>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-			<version>3.0.2</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>6.0.11</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>3.1.3</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-test</artifactId>
-			<version>3.1.3</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version> <!-- Utilisez la version appropriée -->
-			<scope>provided</scope>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/jakarta.ws.rs/jakarta.ws.rs-api -->
-		<dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>3.1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version> <!-- Utilisez la version appropriée -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.ws.rs/jakarta.ws.rs-api -->
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>3.1.3</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet</artifactId>
-			<version>3.1.3</version>
-		</dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>imt.projetrentree.projet.ProjetApplication</mainClass>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>imt.projetrentree.projet.ProjetApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
