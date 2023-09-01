@@ -1,37 +1,61 @@
 package imt.projetrentree.projet.dto.dish;
 
-import imt.projetrentree.projet.annotations.EnumValid;
+import imt.projetrentree.projet.models.DishFilters;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.models.enums.SortingOrder;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import lombok.Data;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Data
 public class DishFilterDTO {
 
-    @PositiveOrZero(message = "Lower price must be positive or zero")
-    private Double lowerPrice = 0.0;
-
-    @PositiveOrZero(message = "Upper price must be positive or zero")
-    private Double upperPrice = 999.0;
-
-    @EnumValid(enumClass = DishDiet.class, message = "Invalid diet value")
-    private List<DishDiet> diets = List.of(DishDiet.values());
-
-    @EnumValid(enumClass = DishTag.class, message = "Invalid tag value")
-    private List<DishTag> tags = List.of(DishTag.values());
-
-    @Size(max = 255, message = "Search text length must be less than or equal to 255 characters")
+    private String lowerPrice = "0.0";
+    private String upperPrice = "999.0";
+    private List<String> diets = Stream.of(DishDiet.values()).map(Enum::name).toList();
+    private List<String> tags = Stream.of(DishTag.values()).map(Enum::name).toList();
     private String searchText = "";
+    private String sortBy = DishSortingMethod.NAME.name();
+    private String sortOrder = SortingOrder.ASC.name();
 
-    @EnumValid(enumClass = DishSortingMethod.class, message = "Invalid sort method")
-    private DishSortingMethod sortBy = DishSortingMethod.NAME;
+    public DishFilters toDishFilters() {
+        return DishFilters.builder()
+                .lowerPrice(convertToDouble(lowerPrice, "Invalid lower price format"))
+                .upperPrice(convertToDouble(upperPrice, "Invalid upper price format"))
+                .diets(diets.stream()
+                        .map(diet -> convertToEnum(DishDiet.class, diet, "Invalid diet value"))
+                        .toList())
+                .tags(tags.stream()
+                        .map(tag -> convertToEnum(DishTag.class, tag, "Invalid tag value"))
+                        .toList())
+                .searchText(searchText)
+                .sortBy(convertToEnum(DishSortingMethod.class, sortBy, "Invalid sort method"))
+                .sortOrder(convertToEnum(SortingOrder.class, sortOrder, "Invalid sort order"))
+                .build();
+    }
 
-    @EnumValid(enumClass = SortingOrder.class, message = "Invalid sort order")
-    private SortingOrder sortOrder = SortingOrder.ASC;
+    private <E extends Enum<E>> E convertToEnum(Class<E> enumClass, String value, String errorMessage) {
+        try {
+            return Enum.valueOf(enumClass, value);
+        } catch (IllegalArgumentException e) {
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+                    .entity(errorMessage).build());
+        }
+    }
+
+    private Double convertToDouble(String value, String errorMessage) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
+                    .entity(errorMessage).build());
+        }
+    }
+
+
 }

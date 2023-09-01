@@ -26,7 +26,7 @@ public class DishController {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@Valid @Nullable @RequestBody DishFilterDTO dishFilterDTO) {
+    public List<Dish> getDishesByIds(@Nullable @RequestBody DishFilterDTO dishFilterDTO) {
         return dishService.getDishes(dishFilterDTO);
     }
 

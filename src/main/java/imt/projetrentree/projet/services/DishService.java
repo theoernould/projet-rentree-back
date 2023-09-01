@@ -4,12 +4,14 @@ import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.dto.dish.DishFilterDTO;
 import imt.projetrentree.projet.exceptions.dish.*;
 import imt.projetrentree.projet.models.Dish;
+import imt.projetrentree.projet.models.DishFilters;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.models.enums.SortingOrder;
 import imt.projetrentree.projet.repositories.DishRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -28,77 +30,34 @@ public class DishService {
 
     public List<Dish> getDishes(DishFilterDTO dishFilterDTO) {
         List<Dish> dishes = dishRepository.findAll();
-        return Objects.isNull(dishFilterDTO) ? dishes : dishes.stream()
-                .filter(dish -> dish.getName().toLowerCase().contains(dishFilterDTO.getSearchText().toLowerCase()))
-                .filter(dish -> dish.getPrice() >= dishFilterDTO.getLowerPrice())
-                .filter(dish -> dish.getPrice() <= dishFilterDTO.getUpperPrice())
-                .filter(dish -> dishFilterDTO.getDiets().contains(dish.getDiet()))
-                .filter(dish -> dishFilterDTO.getTags().containsAll(dish.getTags()))
-                .sorted(getComparator(dishFilterDTO.getSortBy(), dishFilterDTO.getSortOrder()))
-                .collect(Collectors.toList());
+        return Objects.isNull(dishFilterDTO) ? dishes : filterDishes(dishFilterDTO);
     }
 
-    private Double parseLowerPrice(String lowerPrice) {
-        if (lowerPrice == null || lowerPrice.isBlank()) return Double.MIN_VALUE;
-        try {
-            Double value = Double.parseDouble(lowerPrice);
-            if (value < 0) throw new DishNegativePriceException();
-            return value;
-        } catch (NumberFormatException ex) {
-            throw new DishPriceFormatException(lowerPrice);
+    private List<Dish> filterDishes(DishFilterDTO dishFilterDTO) {
+        DishFilters dishFilters = dishFilterDTO.toDishFilters();
+        verifyFilters(dishFilters);
+        return dishRepository.findAll().stream()
+                .filter(dish -> dish.getPrice() >= dishFilters.getLowerPrice())
+                .filter(dish -> dish.getPrice() <= dishFilters.getUpperPrice())
+                .filter(dish -> dishFilters.getDiets().contains(dish.getDiet()))
+                .filter(dish -> dishFilters.getTags().stream().anyMatch(dish.getTags()::contains))
+                .filter(dish -> dish.getName().toLowerCase().contains(dishFilters.getSearchText().toLowerCase()))
+                .sorted(getComparator(dishFilters.getSortBy(), dishFilters.getSortOrder()))
+                .toList();
+    }
+
+    private void verifyFilters(DishFilters filters) {
+        if (filters.getLowerPrice() < 0) {
+            throw new DishNegativePriceException();
         }
-    }
-
-    private Double parseUpperPrice(String upperPrice) {
-        if (upperPrice == null || upperPrice.isBlank()) return Double.MAX_VALUE;
-        try {
-            Double value = Double.parseDouble(upperPrice);
-            if (value < 0) throw new DishNegativePriceException();
-            return value;
-        } catch (NumberFormatException ex) {
-            throw new DishPriceFormatException(upperPrice);
+        if (filters.getUpperPrice() < 0) {
+            throw new DishNegativePriceException();
         }
-    }
-
-    private List<DishDiet> parseDiets(String diets) {
-        if (diets == null || diets.isBlank()) return Arrays.asList(DishDiet.values());
-        return Arrays.stream(diets.split(","))
-                .map(String::toUpperCase)
-                .map(s -> {
-                    try {
-                        return DishDiet.valueOf(s);
-                    } catch (IllegalArgumentException e) {
-                        throw new DishDietDoesNotExistException(s);
-                    }
-                }).collect(Collectors.toList());
-    }
-
-    private List<DishTag> parseTags(String tags) {
-        if (tags == null || tags.isBlank()) return new ArrayList<>();
-        return Arrays.stream(tags.split(","))
-                .map(String::toUpperCase)
-                .map(s -> {
-                    try {
-                        return DishTag.valueOf(s);
-                    } catch (IllegalArgumentException e) {
-                        throw new DishTagDoesNotExistException(s);
-                    }
-                }).collect(Collectors.toList());
-    }
-
-    private DishSortingMethod parseSortBy(String sortby) {
-        try {
-            return DishSortingMethod.valueOf(sortby.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidSortByException(sortby);
+        if (filters.getLowerPrice() > filters.getUpperPrice()) {
+            throw new DishInvalidPriceRangeException();
         }
-    }
-
-    private SortingOrder parseSortingOrder(String sortorder) {
-        try {
-            return SortingOrder.valueOf(sortorder.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidSortingOrderException(sortorder);
+        if (filters.getSearchText().trim().length() > 50) {
+            throw new DishInvalidSearchTextException();
         }
     }
 

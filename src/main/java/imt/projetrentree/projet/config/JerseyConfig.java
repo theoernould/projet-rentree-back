@@ -31,6 +31,5 @@ public class JerseyConfig extends ResourceConfig {
 
         register(AuthenticationFilter.class);
         register(CleanupFilter.class);
-        register(ConstraintViolationExceptionMapper.class);
     }
 }
