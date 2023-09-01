@@ -7,6 +7,7 @@ import imt.projetrentree.projet.exceptions.order.OrderNotFoundException;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.Order;
 import imt.projetrentree.projet.models.User;
+import imt.projetrentree.projet.models.enums.OrderSortingMethod;
 import imt.projetrentree.projet.repositories.DishRepository;
 import imt.projetrentree.projet.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,14 @@ public class OrderService {
         userService.changeBalanceOfUser(user, user.getBalance() - orderPrice);
 
         orderRepository.save(order);
+    }
+
+    public Map<OrderSortingMethod,String> getOrderSortingMethods(){
+        Map<OrderSortingMethod,String> map = new HashMap<>();
+        for (OrderSortingMethod orderSortingMethods : OrderSortingMethod.values()) {
+            map.put(orderSortingMethods, orderSortingMethods.getLabel());
+        }
+        return map;
     }
 
     private Double getTotalPrice(Map<Dish, Integer> dishesWithQuantities) {

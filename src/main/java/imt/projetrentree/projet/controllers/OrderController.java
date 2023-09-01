@@ -6,6 +6,7 @@ import imt.projetrentree.projet.dto.order.OrderDTO;
 import imt.projetrentree.projet.dto.order.OrderDetailDTO;
 import imt.projetrentree.projet.models.Order;
 import imt.projetrentree.projet.models.User;
+import imt.projetrentree.projet.models.enums.OrderSortingMethod;
 import imt.projetrentree.projet.services.OrderService;
 import imt.projetrentree.projet.services.UserService;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Path("orders")
 public class OrderController {
@@ -30,6 +32,13 @@ public class OrderController {
     public List<OrderDTO> getOrdersOfUser() {
         User user = userService.getCurrentUser();
         return orderService.getOrders(user).stream().map(Order::toDTO).toList();
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/sortingmethods")
+    public Map<OrderSortingMethod,String> getOrderSortingMethods(){
+        return orderService.getOrderSortingMethods();
     }
 
     @GET
