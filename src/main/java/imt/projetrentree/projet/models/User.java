@@ -25,6 +25,8 @@ public class User {
 
     Double balance;
 
+    boolean isAdmin;
+
     public UserInfoDTO toUserInfoDTO() {
         return UserInfoDTO.builder()
                 .email(email)

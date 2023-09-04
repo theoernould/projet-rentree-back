@@ -19,6 +19,7 @@ public class UserCreationDTO {
             .firstname(firstname)
             .lastname(lastname)
             .balance(balance)
+            .isAdmin(false)
             .build();
     }
 }

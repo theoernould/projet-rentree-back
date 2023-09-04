@@ -2,6 +2,7 @@ package imt.projetrentree.projet;
 
 import imt.projetrentree.projet.dto.user.UserCreationDTO;
 import imt.projetrentree.projet.models.Dish;
+import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.repositories.DishRepository;
@@ -46,6 +47,7 @@ public class ProjetApplication {
 		saveDishIfNotExists("Vegan Burger", "https://img.cuisineaz.com/660x660/2016/06/07/i95896-burger-veggie-au-steak-de-pois-chiches.jpg", "Vegan burger with vegan cheese, vegan bacon, vegan mayonnaise, vegan salad, vegan tomato, vegan onion, vegan ketchup, vegan mustard, vegan pickles, vegan bread.", "Contains: none", 15.99, List.of(DishTag.VEGETABLE), DishDiet.VEGAN);
 
 		saveUserIfNotExists("user@user.com", "user", "firstname", "lastname");
+		saveAdmin();
 	}
 
 	private void saveUserIfNotExists(String email, String password, String firstname, String lastname) {
@@ -57,6 +59,20 @@ public class ProjetApplication {
 					.lastname(lastname)
 					.build();
 			userService.register(user,10000);
+		}
+	}
+
+	private void saveAdmin() {
+		if (!userRepository.existsByEmail("admin")) {
+			User admin = User.builder()
+					.email("admin@admin.com")
+					.password("admin")
+					.firstname("Admin firstname")
+					.lastname("Admin lastname")
+					.balance(1000000.0)
+					.isAdmin(true)
+					.build();
+			userRepository.save(admin);
 		}
 	}
 
