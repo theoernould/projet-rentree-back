@@ -5,13 +5,13 @@ import imt.projetrentree.projet.dto.user.UserCreationDTO;
 import imt.projetrentree.projet.exceptions.user.*;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.repositories.UserRepository;
-import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class UserService {
@@ -25,7 +25,7 @@ public class UserService {
     private final EmailService emailService;
 
     @Autowired
-    public UserService(EmailService emailService,UserRepository userRepository) {
+    public UserService(EmailService emailService, UserRepository userRepository) {
         this.userRepository = userRepository;
         this.emailService = emailService;
     }
@@ -50,26 +50,28 @@ public class UserService {
         }
     }
 
-    public void resetPasswordSendMail(String email){
+    public void resetPasswordSendMail(String email) {
         if (!isEmailValid(email)) {
             throw new InvalidEmailException();
         }
         if (userRepository.existsByEmail(email)) {
             String token = UUID.randomUUID().toString();
-            resetPasswordTokens.put(token,email);
-            emailService.sendChangePasswordEmail(token,email);
-        }else{
+            resetPasswordTokens.put(token, email);
+            emailService.sendChangePasswordEmail(token, email);
+        } else {
             throw new BadCredentialsException();
         }
     }
 
-    public void resetPassword(String token,String password){
-        if(resetPasswordTokens.containsKey(token)){
+    public void resetPassword(String token, String password) {
+        if (resetPasswordTokens.containsKey(token)) {
             String email = resetPasswordTokens.get(token);
             User user = userRepository.findByEmail(email);
             user.setPassword(password);
             userRepository.save(user);
-        }else{
+            disconnectUser(email);
+            emailService.sendPasswordChangeConfirmationEmail(user);
+        } else {
             throw new EmailTokenExpiredException();
         }
     }
@@ -84,11 +86,11 @@ public class UserService {
         return email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
     }
 
-    public void register(UserCreationDTO userToCreate){
+    public void register(UserCreationDTO userToCreate) {
         register(userToCreate, BEGIN_BALANCE);
     }
 
-    public void register(UserCreationDTO userToCreate,double balance) {
+    public void register(UserCreationDTO userToCreate, double balance) {
         if (!isEmailValid(userToCreate.getEmail())) {
             throw new InvalidEmailException();
         }
@@ -101,6 +103,22 @@ public class UserService {
 
     public void logout() {
         UserService.usersIds.remove(AuthContext.getToken());
+    }
+
+    private void disconnectUser(String email) {
+        UserService.usersIds.remove(findTokenByUserEmail(email));
+    }
+
+    private String findTokenByUserEmail(String email) {
+        AtomicReference<String> userToken = new AtomicReference<>("");
+        UserService.usersIds.forEach((token, id) -> {
+            User user = userRepository.findById(id).orElseThrow();
+            if (user.getEmail().equals(email)) {
+                userToken.set(token);
+                return;
+            }
+        });
+        return userToken.get();
     }
 
     public void changeBalanceOfUser(User user, Double newBalance) {

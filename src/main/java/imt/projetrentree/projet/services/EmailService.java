@@ -52,6 +52,14 @@ public class EmailService {
         sendMail(email, "It seems you forgot your password. Click here to reset it.", "resetPassword", context);
     }
 
+    public void sendPasswordChangeConfirmationEmail(User user) {
+        Context context = new Context();
+        context.setVariable("firstname", user.getFirstname());
+        context.setVariable("lastname", user.getLastname());
+
+        sendMail(user.getEmail(), "Password Change Confirmation", "passwordChangeConfirmation", context);
+    }
+
     public void sendWelcomeEmail(User user) {
         Context context = new Context();
         context.setVariable("firstname", user.getFirstname());
