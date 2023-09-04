@@ -28,8 +28,9 @@ public class JerseyConfig extends ResourceConfig {
 
         // allow all cors
         register(CORSFilter.class);
-
         register(AuthenticationFilter.class);
         register(CleanupFilter.class);
+
+        register(GlobalConfig.class);
     }
 }

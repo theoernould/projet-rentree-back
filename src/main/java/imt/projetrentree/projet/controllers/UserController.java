@@ -40,15 +40,15 @@ public class UserController {
         return userService.login(userCredentialsDTO.getEmail(), userCredentialsDTO.getPassword());
     }
 
-    @POST
-    @Path("resetpasswordmail")
+    @GET
+    @Path("resetPasswordMail")
     @Consumes("application/json")
     public void resetPasswordMal(@QueryParam("email") String email) {
         userService.resetPasswordSendMail(email);
     }
 
-    @POST
-    @Path("resetpassword")
+    @GET
+    @Path("resetPassword")
     @Consumes("application/json")
     public void resetPassword(@QueryParam("token") String token, @QueryParam("password") String password) {
         userService.resetPassword(token, password);
