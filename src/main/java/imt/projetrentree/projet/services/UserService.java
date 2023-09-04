@@ -30,8 +30,6 @@ public class UserService {
         this.emailService = emailService;
     }
 
-
-
     public User getCurrentUser() {
         Long currentUserId = UserService.usersIds.get(AuthContext.getToken());
         return userRepository.findById(currentUserId).orElseThrow();
@@ -97,7 +95,8 @@ public class UserService {
         if (userRepository.existsByEmail(userToCreate.getEmail())) {
             throw new EmailAlreadyUsedException();
         }
-        userRepository.save(userToCreate.toUser(balance));
+        User userCreated = userRepository.save(userToCreate.toUser(balance));
+        emailService.sendWelcomeEmail(userCreated);
     }
 
     public void logout() {
