@@ -2,6 +2,7 @@ package imt.projetrentree.projet.models;
 
 import imt.projetrentree.projet.dto.order.OrderDTO;
 import imt.projetrentree.projet.dto.order.OrderDetailDTO;
+import imt.projetrentree.projet.dto.order.OrderSummaryDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,6 +61,14 @@ public class Order {
                 .date(creationDateTime)
                 .orderContent(orderContent)
                 .build();
+    }
+
+    public OrderSummaryDTO toOrderSummaryDTO() {
+        OrderSummaryDTO orderSummaryDTO = new OrderSummaryDTO();
+        orderSummaryDTO.setUser(user);
+        orderSummaryDTO.setDishesWithQuantities(dishesWithQuantities);
+        orderSummaryDTO.setTotalPrice(getTotalPrice());
+        return orderSummaryDTO;
     }
 
 }

@@ -1,6 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.order.OrderCreationDTO;
+import imt.projetrentree.projet.dto.order.OrderSummaryDTO;
 import imt.projetrentree.projet.exceptions.dish.InvalidOrderSortingMethodException;
 import imt.projetrentree.projet.exceptions.order.DishDoesNotExistException;
 import imt.projetrentree.projet.exceptions.order.NotEnoughMoneyException;
@@ -34,6 +35,9 @@ public class OrderService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
     public void createOrder(User user, OrderCreationDTO orderCreationDTO) {
         Map<Long, Integer> dishesIdsWithQuantities = orderCreationDTO.getOrderContent();
 
@@ -58,7 +62,10 @@ public class OrderService {
 
         userService.changeBalanceOfUser(user, user.getBalance() - orderPrice);
 
-        orderRepository.save(order);
+        Order orderCreated = orderRepository.save(order);
+
+        OrderSummaryDTO orderSummaryDTO = orderCreated.toOrderSummaryDTO();
+        emailService.sendOrderSummaryEmail(orderSummaryDTO);
     }
 
     public Map<OrderSortingMethod,String> getOrderSortingMethods(){

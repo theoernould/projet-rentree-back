@@ -25,6 +25,8 @@ public class ProjetApplication {
 	@Autowired
 	private UserRepository userRepository;
 
+	public static final String APP_NAME = "DeliveCROUS";
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetApplication.class, args);
 	}
