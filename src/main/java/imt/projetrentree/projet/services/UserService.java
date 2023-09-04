@@ -32,7 +32,11 @@ public class UserService {
 
     public User getCurrentUser() {
         Long currentUserId = UserService.usersIds.get(AuthContext.getToken());
-        return userRepository.findById(currentUserId).orElseThrow();
+        return getUserById(currentUserId);
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow();
     }
 
     public String login(String email, String password) {

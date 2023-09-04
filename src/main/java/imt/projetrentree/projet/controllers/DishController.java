@@ -1,5 +1,7 @@
 package imt.projetrentree.projet.controllers;
 
+import imt.projetrentree.projet.annotations.AdminOnly;
+import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
 import imt.projetrentree.projet.dto.dish.DishFilterDTO;
 import imt.projetrentree.projet.models.Dish;
@@ -23,7 +25,7 @@ public class DishController {
     @Autowired
     private DishService dishService;
 
-    @POST
+    @GET
     @Consumes("application/json")
     @Produces("application/json")
     public List<Dish> getDishesByIds(@Nullable @RequestBody DishFilterDTO dishFilterDTO) {
@@ -60,6 +62,8 @@ public class DishController {
 
 
     @POST
+    @NeedToBeAuthenticated
+    @AdminOnly
     @Consumes("application/json")
     public void createDish(@NotNull @RequestBody DishCreationDTO dish) {
         dishService.createDish(dish);
@@ -67,6 +71,8 @@ public class DishController {
 
     @PATCH
     @Path("/{id}")
+    @NeedToBeAuthenticated
+    @AdminOnly
     @Consumes("application/json")
     public void updateDish(@NotNull @PathParam("id") Long id, @RequestBody DishCreationDTO updatedDish) {
         dishService.updateDish(id, updatedDish);
@@ -74,6 +80,8 @@ public class DishController {
 
 
     @DELETE
+    @NeedToBeAuthenticated
+    @AdminOnly
     @Path("/{id}")
     public void deleteDish(@NotNull @PathParam("id") final Long id) {
         dishService.deleteDish(id);
