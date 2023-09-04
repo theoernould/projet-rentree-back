@@ -1,14 +1,16 @@
 package imt.projetrentree.projet.services;
 
+import imt.projetrentree.projet.dto.order.OrderSummaryDTO;
 import imt.projetrentree.projet.exceptions.user.CouldNotSendMailException;
 import imt.projetrentree.projet.models.User;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+
+import static imt.projetrentree.projet.ProjetApplication.APP_NAME;
 
 @Service
 public class EmailService {
@@ -33,7 +35,7 @@ public class EmailService {
 
             helper.setText(emailContent, true);
 
-            helper.setFrom("n79880215@gmail.com","Projet Rentrée no reply");
+            helper.setFrom("n79880215@gmail.com", APP_NAME + " no reply");
 
             emailSender.send(message);
         } catch (Exception e) {
@@ -55,6 +57,16 @@ public class EmailService {
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
 
-        sendMail(user.getEmail(), "Welcome to Projet Rentrée", "welcome", context);
+        sendMail(user.getEmail(), "Welcome to " + APP_NAME + "!", "welcome", context);
     }
+
+    public void sendOrderSummaryEmail(OrderSummaryDTO orderSummaryDTO) {
+        Context context = new Context();
+        context.setVariable("user", orderSummaryDTO.getUser());
+        context.setVariable("dishesWithQuantities", orderSummaryDTO.getDishesWithQuantities());
+        context.setVariable("orderTotalPrice", orderSummaryDTO.getTotalPrice());
+
+        sendMail(orderSummaryDTO.getUser().getEmail(), "Your Order Summary", "orderConfirmation", context);
+    }
+
 }
