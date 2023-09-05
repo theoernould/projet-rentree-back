@@ -2,7 +2,6 @@ package imt.projetrentree.projet.config;
 
 import imt.projetrentree.projet.filters.AuthenticationFilter;
 import imt.projetrentree.projet.filters.CORSFilter;
-import imt.projetrentree.projet.filters.CleanupFilter;
 import jakarta.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,6 @@ public class JerseyConfig extends ResourceConfig {
         // allow all cors
         register(CORSFilter.class);
         register(AuthenticationFilter.class);
-        register(CleanupFilter.class);
 
         register(GlobalConfig.class);
     }

@@ -87,7 +87,7 @@ public class OrderService {
     public List<Order> getOrders(User user, String sortingMethodStr, String sortingOrderStr) {
         OrderSortingMethod orderSortingMethod;
         try {
-            orderSortingMethod = OrderSortingMethod.valueOf(sortingMethodStr);
+            orderSortingMethod = OrderSortingMethod.valueOf(sortingMethodStr.toUpperCase());
         } catch (Exception e) {
             throw new InvalidOrderSortingMethodException(sortingMethodStr);
         }
@@ -95,7 +95,7 @@ public class OrderService {
         try {
             sortingOrder = SortingOrder.valueOf(sortingOrderStr);
         } catch (Exception e) {
-            throw new InvalidOrderSortingMethodException(sortingOrderStr);
+            throw new InvalidOrderSortingMethodException(sortingOrderStr.toUpperCase());
         }
         List<Order> orders = orderRepository.findAllByUserId(user.getId());
         if (orderSortingMethod == OrderSortingMethod.DATE) {
