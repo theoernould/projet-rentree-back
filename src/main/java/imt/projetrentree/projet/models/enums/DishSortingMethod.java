@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum DishSortingMethod {
-    NAME("Name"), PRICE("Price");
+    NAME("Name"), PRICE("Price"), ID("Id");
 
     private final String label;
 

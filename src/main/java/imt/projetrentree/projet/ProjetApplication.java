@@ -63,7 +63,7 @@ public class ProjetApplication {
 	}
 
 	private void saveAdmin() {
-		if (!userRepository.existsByEmail("admin")) {
+		if (!userRepository.existsByEmail("admin@admin.com")) {
 			User admin = User.builder()
 					.email("admin@admin.com")
 					.password("admin")

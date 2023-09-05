@@ -20,7 +20,7 @@ public class DishFilterDTO {
     private List<String> diets = Stream.of(DishDiet.values()).map(Enum::name).toList();
     private List<String> tags = Stream.of(DishTag.values()).map(Enum::name).toList();
     private String searchText = "";
-    private String sortBy = DishSortingMethod.NAME.name();
+    private String sortBy = DishSortingMethod.ID.name();
     private String sortOrder = SortingOrder.ASC.name();
 
     public DishFilters toDishFilters() {
@@ -33,7 +33,7 @@ public class DishFilterDTO {
                 .tags(tags.stream()
                         .map(tag -> convertToEnum(DishTag.class, tag, "Invalid tag value"))
                         .toList())
-                .searchText(searchText)
+                .searchText(searchText.trim())
                 .sortBy(convertToEnum(DishSortingMethod.class, sortBy, "Invalid sort method"))
                 .sortOrder(convertToEnum(SortingOrder.class, sortOrder, "Invalid sort order"))
                 .build();
@@ -41,7 +41,7 @@ public class DishFilterDTO {
 
     private <E extends Enum<E>> E convertToEnum(Class<E> enumClass, String value, String errorMessage) {
         try {
-            return Enum.valueOf(enumClass, value);
+            return Enum.valueOf(enumClass, value.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
                     .entity(errorMessage).build());

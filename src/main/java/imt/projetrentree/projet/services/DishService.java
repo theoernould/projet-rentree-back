@@ -36,14 +36,21 @@ public class DishService {
     private List<Dish> filterDishes(DishFilterDTO dishFilterDTO) {
         DishFilters dishFilters = dishFilterDTO.toDishFilters();
         verifyFilters(dishFilters);
+        List<DishDiet> diets = dishFilters.getDiets();
+        List<DishTag> tags = dishFilters.getTags();
         return dishRepository.findAll().stream()
                 .filter(dish -> dish.getPrice() >= dishFilters.getLowerPrice())
                 .filter(dish -> dish.getPrice() <= dishFilters.getUpperPrice())
-                .filter(dish -> dishFilters.getDiets().contains(dish.getDiet()))
-                .filter(dish -> dishFilters.getTags().stream().anyMatch(dish.getTags()::contains))
-                .filter(dish -> dish.getName().toLowerCase().contains(dishFilters.getSearchText().toLowerCase()))
+                .filter(dish -> diets.isEmpty() || diets.contains(dish.getDiet()))
+                .filter(dish -> tags.isEmpty() || tags.stream().anyMatch(dish.getTags()::contains))
+                .filter(dish -> searchDish(dish, dishFilters.getSearchText()))
                 .sorted(getComparator(dishFilters.getSortBy(), dishFilters.getSortOrder()))
                 .toList();
+    }
+
+    private boolean searchDish(Dish dish, String searchText) {
+        String lowerCaseSearchText = searchText.toLowerCase();
+        return dish.getName().toLowerCase().contains(lowerCaseSearchText) || dish.getDescription().toLowerCase().contains(lowerCaseSearchText);
     }
 
     private void verifyFilters(DishFilters filters) {
@@ -62,17 +69,12 @@ public class DishService {
     }
 
     private Comparator<Dish> getComparator(DishSortingMethod sortBy, SortingOrder order) {
-        Comparator<Dish> comparator;
-        switch (sortBy) {
-            case NAME:
-                comparator = Comparator.comparing(Dish::getName, String.CASE_INSENSITIVE_ORDER);
-                break;
-            case PRICE:
-                comparator = Comparator.comparing(Dish::getPrice);
-                break;
-            default:
-                throw new InvalidSortByException(sortBy.getLabel());
-        }
+        Comparator<Dish> comparator = switch (sortBy) {
+            case NAME -> Comparator.comparing(Dish::getName, String.CASE_INSENSITIVE_ORDER);
+            case PRICE -> Comparator.comparing(Dish::getPrice);
+            case ID -> Comparator.comparing(Dish::getId);
+            default -> throw new InvalidSortByException(sortBy.getLabel());
+        };
         return order == SortingOrder.ASC ? comparator : comparator.reversed();
     }
 
