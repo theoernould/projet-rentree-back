@@ -203,7 +203,7 @@
 					"response": []
 				}
 			],
-			"description": "Représente un plat dans l'application.\n\nEn base de données, un plat est représenté dans la table DISHES qui contient :\n\n- un nom\n    \n- une description\n    \n- une liste d'alergènes (texte)\n    \n- une image (url)\n    \n- un prix\n    \n- un regime alimentaire (normal, végétarien ou vegan)\n    \n- une liste de tags utilisés pour filtrer les plats"
+			"description": "Représente un plat dans l'application.\n\nEn base de données, un plat est représenté dans la table DISHES qui contient :\n\n- un nom\n- une description\n- une liste d'alergènes (texte)\n- une image (url)\n- un prix\n- un regime alimentaire (normal, végétarien ou vegan)\n- une liste de tags utilisés pour filtrer les plats"
 		},
 		{
 			"name": "Users",
@@ -243,7 +243,7 @@
 								"login"
 							]
 						},
-						"description": "Permet de se connecter à un compte via email et mot de passe.\n\n**L'API retourne un token de connexion qui sera à envoyer dans le header toutes les requêtes qui recupèrent des informations liées à un utilisateur.**\n\nDans cette collection Postman, une variable globale {{user_token}} est présente pour stocker ce token puis l'envoyer dans les requêtes via le header. A chaque connexion, il faut modifier cette variable avec le nouveau token de connexion reçu. Pour ce faire, cliquer sur le dossier de la collection, puis aller dans l'onglet \"Variables\"."
+						"description": "Permet de se connecter à un compte via email et mot de passe.\n\n**L'API retourne un token de connexion qui est stocké dans les cookies pour toutes les requêtes qui recupèrent des informations liées à un utilisateur.**"
 					},
 					"response": []
 				},
