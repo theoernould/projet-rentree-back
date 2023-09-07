@@ -7,4 +7,5 @@ import java.util.Map;
 @Data
 public class OrderCreationDTO {
     private Map<Long, Integer> orderContent;
+    private String address;
 }

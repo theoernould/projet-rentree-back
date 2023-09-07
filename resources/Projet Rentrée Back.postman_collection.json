@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "9c98ecdd-b2d1-451c-ad35-60611ab1f661",
+		"_postman_id": "59fecea7-093e-481e-a104-13c641092291",
 		"name": "Projet Rentrée Back",
 		"description": "Cette collection contient toutes les requêtes utiles à faire à l'API Rest de notre projet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20210699"
+		"_exporter_id": "20203369"
 	},
 	"item": [
 		{
@@ -113,7 +113,7 @@
 								"1"
 							]
 						},
-						"description": "Permet de récuperer le detail d'un plat à partir de son id.\n\n> {  \n\"id\": 1,  \n\"name\": \"Spaghetti Carbonara\",  \n\"description\": \"Classic Italian pasta dish with eggs, cheese, pancetta, and black pepper.\",  \n\"alergens\": \"Contains: eggs, dairy, pork\",  \n\"image\": \"[https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg\"](https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg\"),  \n\"tags\": \\[  \n\"MEAT\"  \n\\],  \n\"diet\": \"NORMAL\",  \n\"price\": 12.99  \n}"
+						"description": "Permet de récuperer le detail d'un plat à partir de son id.\n\n``` json\n{\n    \"id\": 1,\n    \"name\": \"Spaghetti Carbonara\",\n    \"description\": \"Classic Italian pasta dish with eggs, cheese, pancetta, and black pepper.\",\n    \"alergens\": \"Contains: eggs, dairy, pork\",\n    \"image\": \"https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg\",\n    \"tags\": [\n        \"MEAT\"\n    ],\n    \"diet\": \"NORMAL\",\n    \"price\": 12.99\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -160,7 +160,7 @@
 								"diets"
 							]
 						},
-						"description": "Permet de recuperer la liste des regime alimentaires des plats ainsi que leurs labels associés.\n\n> {  \n\"VEGAN\": \"Vegan\",  \n\"VEGETARIAN\": \"Vegetarian\",  \n\"NORMAL\": \"Normal\"  \n}"
+						"description": "Permet de recuperer la liste des regime alimentaires des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"VEGAN\": \"Vegan\",\n    \"VEGETARIAN\": \"Vegetarian\",\n    \"NORMAL\": \"Normal\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -179,7 +179,7 @@
 								"tags"
 							]
 						},
-						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n> {  \n\"MEAT\": \"Meat\",  \n\"DESSERT\": \"Dessert\",  \n\"OTHER\": \"Other\",  \n\"HEALTHY\": \"Healthy\",  \n\"VEGETABLE\": \"Vegetable\",  \n\"DRINK\": \"Drink\",  \n\"FISH\": \"Fish\"  \n}"
+						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"MEAT\": \"Meat\",\n    \"DESSERT\": \"Dessert\",\n    \"OTHER\": \"Other\",\n    \"HEALTHY\": \"Healthy\",\n    \"VEGETABLE\": \"Vegetable\",\n    \"DRINK\": \"Drink\",\n    \"FISH\": \"Fish\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -198,7 +198,7 @@
 								"sortingmethods"
 							]
 						},
-						"description": "> Permet de recuperer la liste des méthode de tri des plats ainsi que leurs labels associés.  \n{  \n\"PRICE\": \"Price\",  \n\"NAME\": \"Name\"  \n}"
+						"description": "Permet de recuperer la liste des méthode de tri des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"PRICE\": \"Price\",\n    \"NAME\": \"Name\"\n}\n\n ```"
 					},
 					"response": []
 				}
@@ -254,7 +254,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\":\"Prenom\",\r\n    \"lastname\":\"Nom\",\r\n    \"email\":\"adressemailvalide@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"raw": "{\r\n    \"firstname\":\"Prenom\",\r\n    \"lastname\":\"Nom\",\r\n    \"email\":\"adressemailvalide@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"address\": \"address\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +271,7 @@
 								"register"
 							]
 						},
-						"description": "Permet de créer un compte en fournissant nom, prénom, email et mot de passe"
+						"description": "Permet de créer un compte en fournissant nom, prénom, email et mot de passe ainsi qu'une adresse"
 					},
 					"response": []
 				},
@@ -282,7 +282,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "{{user_token}}",
+								"value": "1415fd01-11a0-4c7c-82a0-b5cf5b13beda",
 								"type": "text"
 							}
 						],
@@ -296,7 +296,7 @@
 								"info"
 							]
 						},
-						"description": "Permet de recuperer des informations sur l'utilisateur connecté.\n\n> {  \n\"email\": \"[admin@admin.com](https://mailto:admin@admin.com)\",  \n\"firstname\": \"Admin firstname\",  \n\"lastname\": \"Admin lastname\",  \n\"balance\": 1000000.0  \n}"
+						"description": "Permet de recuperer des informations sur l'utilisateur connecté.\n\n``` json\n{\n    \"email\": \"admin@admin.com\",\n    \"firstname\": \"Admin firstname\",\n    \"lastname\": \"Admin lastname\",\n    \"address\": \"Admin address\",\n    \"balance\": 1000000.0\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -383,7 +383,7 @@
 					"response": []
 				}
 			],
-			"description": "Gestion des utilisateurs et de tout le système d'authentification.\n\nEn base de données, un utilisateur est représenté par la table CUSTOMERS qui contient :\n\n- un email, idéalement une adresse mail existante valide puisque un mail y sera envoyé pour une demande de changement de mot de passe, le passage d'une nouvelle commande, ...\n    \n- un mot de passe\n    \n- un nom\n    \n- un prénom\n    \n- une cagnote\n    \n- un booleen permettant de savoir si l'utilisateur à les permissions d'admin\n    \n\nToute notre gestion des utilisateur se base sur un token retourné à la connexion. A chaque connexion, ce token est différent. Il envoyé dans le header de chaque requête qui recupère des données liées à un utilisateur. Attention, les tokens sont tous supprimés à l'arrêt de l'API, ce qui déconnecte tous les utilisateurs.\n\nDeux comptes sont déjà créés au lancement de l'API :\n\n- Compte de test :\n    \n    - **Mail** : user@user.com\n        \n    - **Mot de passe** : user\n        \n- Compte de test avec les privilèges administrateur :\n    \n    - **Mail** : admin@admin.com\n        \n    - **Mot de passe** : admin"
+			"description": "Gestion des utilisateurs et de tout le système d'authentification.\n\nEn base de données, un utilisateur est représenté par la table CUSTOMERS qui contient :\n\n- un email, idéalement une adresse mail existante valide puisque un mail y sera envoyé pour une demande de changement de mot de passe, le passage d'une nouvelle commande, ...\n- un mot de passe\n- un nom\n- un prénom\n- une cagnote\n    \n- une adresse\n    \n- un booleen permettant de savoir si l'utilisateur à les permissions d'admin\n    \n\nToute notre gestion des utilisateur se base sur un token retourné à la connexion. A chaque connexion, ce token est différent. Il envoyé dans le header de chaque requête qui recupère des données liées à un utilisateur. Attention, les tokens sont tous supprimés à l'arrêt de l'API, ce qui déconnecte tous les utilisateurs.\n\nDeux comptes sont déjà créés au lancement de l'API :\n\n- Compte de test :\n    - **Mail** : [user@user.com](https://mailto:user@user.com)\n    - **Mot de passe** : user\n- Compte de test avec les privilèges administrateur :\n    - **Mail** : [admin@admin.com](https://mailto:admin@admin.com)\n    - **Mot de passe** : admin"
 		},
 		{
 			"name": "Orders",
@@ -432,7 +432,7 @@
 								}
 							]
 						},
-						"description": "Permet de récuperer l'historique de commande de l'utilisateur connecté.\n\n> \\[  \n{  \n\"id\": 1,  \n\"totalPrice\": 36.65,  \n\"date\": \"2023-09-05T16:32:47.626953\"  \n},  \n{  \n\"id\": 2,  \n\"totalPrice\": 36.0,  \n\"date\": \"2023-09-05T16:33:08.220904\"  \n}  \n\\]"
+						"description": "Permet de récuperer l'historique de commande de l'utilisateur connecté.\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"totalPrice\": 36.65,\n        \"date\": \"2023-09-05T16:32:47.626953\",\n        \"address\": \"1 rue des zozos\"\n    },\n    {\n        \"id\": 2,\n        \"totalPrice\": 36.0,\n        \"date\": \"2023-09-05T16:33:08.220904\"\n        \"address\": \"1 rue des maboules\"\n    }\n]\n\n ```"
 					},
 					"response": []
 				},
@@ -449,7 +449,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"orderContent\":{\r\n        \"3\":1,\r\n        \"4\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"orderContent\": {\r\n        \"3\":1,\r\n        \"4\":2\r\n    },\r\n    \"address\": \"address\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -465,7 +465,7 @@
 								"orders"
 							]
 						},
-						"description": "Permet de passer une commande en tant qu'utilisateur connecté.\n\nLe contenu de la commande contient la liste des id des plats choisis (ci-dessous 3 et 4) associés à leurs quantités (ci-dessous 1 et 2)"
+						"description": "Permet de passer une commande en tant qu'utilisateur connecté.\n\nLe contenu de la commande contient la liste des id des plats choisis (ci-dessous 3 et 4) associés à leurs quantités (ci-dessous 1 et 2), et l'adresse de livraison"
 					},
 					"response": []
 				},
@@ -490,7 +490,7 @@
 								"1"
 							]
 						},
-						"description": "Permet de récuperer le detail d'une commande à partir de son id.  \nLa commande doit avoir été passée par l'utilisateur connecté.\n\n> {  \n\"id\": 1,  \n\"date\": \"2023-09-05T16:32:47.626953\",  \n\"totalPrice\": 36.65,  \n\"orderContent\": {  \n\"3\": 1,  \n\"4\": 2  \n}  \n}"
+						"description": "Permet de récuperer le detail d'une commande à partir de son id.  \nLa commande doit avoir été passée par l'utilisateur connecté.\n\n``` json\n{\n    \"id\": 1,\n    \"date\": \"2023-09-05T16:32:47.626953\",\n    \"totalPrice\": 36.65,\n    \"address\": \"address\"\n    \"orderContent\": {\n        \"3\": 1,\n        \"4\": 2\n    }\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -509,12 +509,12 @@
 								"sortingmethods"
 							]
 						},
-						"description": "Permet de recuperer les modes de tris des commandes aisin que leurs labels associés.\n\n> {  \n\"DATE\": \"Date\",  \n\"PRICE\": \"Price\"  \n}"
+						"description": "Permet de recuperer les modes de tris des commandes aisin que leurs labels associés.\n\n``` json\n{\n    \"DATE\": \"Date\",\n    \"PRICE\": \"Price\"\n}\n\n ```"
 					},
 					"response": []
 				}
 			],
-			"description": "Représente un commande.\n\nEn base de données, une commande est représentée par deux tables :\n\n- Une table ORDERS qui contient :\n    \n    - L'id de l'utilisateur qui a passé la commande\n        \n    - La date de création de la commande\n        \n- Une table ORDER_DISHES qui associe des plat à un commande avec un certaine quantité"
+			"description": "Représente un commande.\n\nEn base de données, une commande est représentée par deux tables :\n\n- Une table ORDERS qui contient :\n    \n    - L'id de l'utilisateur qui a passé la commande\n    - La date de création de la commande\n        \n    - L'adresse de livraison\n        \n- Une table ORDER_DISHES qui associe des plat à un commande avec un certaine quantité"
 		},
 		{
 			"name": "GetSortingOrders",
@@ -531,7 +531,7 @@
 						"sortingorders"
 					]
 				},
-				"description": "Permet de recuperer les modes de tri (ascendant ou descendant) ainsi que leurs labels associés.\n\n> {  \n\"DESC\": \"Descending\",  \n\"ASC\": \"Ascending\"  \n}"
+				"description": "Permet de recuperer les modes de tri (ascendant ou descendant) ainsi que leurs labels associés.\n\n``` json\n{\n    \"DESC\": \"Descending\",\n    \"ASC\": \"Ascending\"\n}\n\n ```"
 			},
 			"response": []
 		}
@@ -559,7 +559,7 @@
 	"variable": [
 		{
 			"key": "user_token",
-			"value": "3ee6dfaa-020b-485e-b623-4386ed6ba6ce"
+			"value": "1415fd01-11a0-4c7c-82a0-b5cf5b13beda"
 		},
 		{
 			"key": "base_url",

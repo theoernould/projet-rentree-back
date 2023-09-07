@@ -9,5 +9,6 @@ public class UserInfoDTO {
     private String email;
     private String firstname;
     private String lastname;
+    private String address;
     private Double balance;
 }

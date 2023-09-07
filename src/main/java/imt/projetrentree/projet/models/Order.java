@@ -38,6 +38,8 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationDateTime;
 
+    private String address;
+
     public Double getTotalPrice() {
         return dishesWithQuantities.entrySet().stream()
                 .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
@@ -49,6 +51,7 @@ public class Order {
                 .id(id)
                 .totalPrice(getTotalPrice())
                 .date(creationDateTime)
+                .address(address)
                 .build();
     }
 
@@ -60,6 +63,7 @@ public class Order {
                 .totalPrice(getTotalPrice())
                 .date(creationDateTime)
                 .orderContent(orderContent)
+                .address(address)
                 .build();
     }
 
@@ -68,6 +72,7 @@ public class Order {
         orderSummaryDTO.setUser(user);
         orderSummaryDTO.setDishesWithQuantities(dishesWithQuantities);
         orderSummaryDTO.setTotalPrice(getTotalPrice());
+        orderSummaryDTO.setAddress(address);
         return orderSummaryDTO;
     }
 

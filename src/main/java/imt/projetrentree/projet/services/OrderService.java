@@ -59,6 +59,7 @@ public class OrderService {
         order.setUser(user);
         order.setCreationDateTime(LocalDateTime.now());
         order.setDishesWithQuantities(dishesWithQuantities);
+        order.setAddress(orderCreationDTO.getAddress());
 
         userService.changeBalanceOfUser(user, user.getBalance() - orderPrice);
 

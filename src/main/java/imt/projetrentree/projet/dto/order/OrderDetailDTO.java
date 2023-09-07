@@ -11,6 +11,7 @@ import java.util.Map;
 public class OrderDetailDTO {
     private Long id;
     private LocalDateTime date;
+    private String address;
     private Double totalPrice;
     private Map<Long, Integer> orderContent;
 }

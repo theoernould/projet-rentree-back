@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 @Builder
 public class UserCreationDTO {
-    String email;
-    String password;
-    String firstname;
-    String lastname;
+    private String email;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private String address;
 
     public User toUser(Double balance) {
         return User.builder()
@@ -19,6 +20,7 @@ public class UserCreationDTO {
             .firstname(firstname)
             .lastname(lastname)
             .balance(balance)
+            .address(address)
             .isAdmin(false)
             .build();
     }

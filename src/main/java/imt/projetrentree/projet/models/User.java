@@ -23,6 +23,8 @@ public class User {
     String firstname;
     String lastname;
 
+    String address;
+
     Double balance;
 
     boolean isAdmin;
@@ -32,6 +34,7 @@ public class User {
                 .email(email)
                 .firstname(firstname)
                 .lastname(lastname)
+                .address(address)
                 .balance(balance)
                 .build();
     }

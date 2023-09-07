@@ -46,17 +46,18 @@ public class ProjetApplication {
 		saveDishIfNotExists("Chocolate Lava Cake", "https://gimmedelicious.com/wp-content/uploads/2020/01/Chocolate-Molten-Lava-Cakes-10.jpg", "Warm chocolate cake with a gooey molten center, topped with vanilla ice cream.", "Contains: dairy, eggs", 7.50, List.of(DishTag.DESSERT), DishDiet.NORMAL);
 		saveDishIfNotExists("Vegan Burger", "https://img.cuisineaz.com/660x660/2016/06/07/i95896-burger-veggie-au-steak-de-pois-chiches.jpg", "Vegan burger with vegan cheese, vegan bacon, vegan mayonnaise, vegan salad, vegan tomato, vegan onion, vegan ketchup, vegan mustard, vegan pickles, vegan bread.", "Contains: none", 15.99, List.of(DishTag.VEGETABLE), DishDiet.VEGAN);
 
-		saveUserIfNotExists("user@user.com", "user", "firstname", "lastname");
+		saveUserIfNotExists("user@user.com", "user", "firstname", "lastname", "user address");
 		saveAdmin();
 	}
 
-	private void saveUserIfNotExists(String email, String password, String firstname, String lastname) {
+	private void saveUserIfNotExists(String email, String password, String firstname, String lastname, String address) {
 		if (!userRepository.existsByEmail(email)) {
 			UserCreationDTO user = UserCreationDTO.builder()
 					.email(email)
 					.password(password)
 					.firstname(firstname)
 					.lastname(lastname)
+					.address(address)
 					.build();
 			userService.register(user,10000);
 		}
@@ -70,6 +71,7 @@ public class ProjetApplication {
 					.firstname("Admin firstname")
 					.lastname("Admin lastname")
 					.balance(1000000.0)
+					.address("Admin address")
 					.isAdmin(true)
 					.build();
 			userRepository.save(admin);

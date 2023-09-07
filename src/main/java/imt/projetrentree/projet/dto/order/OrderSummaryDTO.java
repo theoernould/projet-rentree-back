@@ -10,5 +10,6 @@ import java.util.Map;
 public class OrderSummaryDTO {
     private User user;
     private Map<Dish, Integer> dishesWithQuantities;
+    private String address;
     private Double totalPrice;
 }
