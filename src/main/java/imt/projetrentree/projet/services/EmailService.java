@@ -6,6 +6,7 @@ import imt.projetrentree.projet.models.User;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -43,6 +44,7 @@ public class EmailService {
         }
     }
 
+    @Async
     public void sendChangePasswordEmail(String token, String email) {
         String urlWithToken = "https://localhost:19006?token=" + token;
 
@@ -52,6 +54,7 @@ public class EmailService {
         sendMail(email, "It seems you forgot your password. Click here to reset it.", "resetPassword", context);
     }
 
+    @Async
     public void sendPasswordChangeConfirmationEmail(User user) {
         Context context = new Context();
         context.setVariable("firstname", user.getFirstname());
@@ -60,6 +63,7 @@ public class EmailService {
         sendMail(user.getEmail(), "Password Change Confirmation", "passwordChangeConfirmation", context);
     }
 
+    @Async
     public void sendWelcomeEmail(User user) {
         Context context = new Context();
         context.setVariable("firstname", user.getFirstname());
@@ -68,6 +72,7 @@ public class EmailService {
         sendMail(user.getEmail(), "Welcome to " + APP_NAME + " !", "welcome", context);
     }
 
+    @Async
     public void sendOrderSummaryEmail(OrderSummaryDTO orderSummaryDTO) {
         Context context = new Context();
         context.setVariable("user", orderSummaryDTO.getUser());
