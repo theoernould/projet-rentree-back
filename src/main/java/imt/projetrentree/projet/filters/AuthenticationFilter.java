@@ -10,6 +10,7 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ResourceInfo;
 import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.Cookie;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
@@ -30,9 +31,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         Method method = resourceInfo.getResourceMethod();
         if (method.isAnnotationPresent(NeedToBeAuthenticated.class)) {
-            NeedToBeAuthenticated annotation = method.getAnnotation(NeedToBeAuthenticated.class);
-            String tokenHeaderName = annotation.tokenHeaderName();
-            String token = headers.getHeaderString(tokenHeaderName);
+            Cookie cookie = headers.getCookies().get("auth_token");
+            String token = cookie != null ? cookie.getValue() : null;
 
             if (token == null || !isValidToken(token)) {
                 requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("User not authenticated").build());
