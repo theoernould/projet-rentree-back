@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.user;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class CouldNotSendMailException extends WebApplicationException {
+public class CouldNotSendMailException extends CustomException {
     public CouldNotSendMailException(String mail) {
-        super(Response.status(Response.Status.GATEWAY_TIMEOUT)
-                .entity("Could not send mail to address: " + mail)
-                .build());
+        super(Response.Status.GATEWAY_TIMEOUT, "Could not send mail to address: " + mail);
     }
 }

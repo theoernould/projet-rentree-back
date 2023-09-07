@@ -16,18 +16,18 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String email;
-    String password;
+    private Long id;
+    private String email;
+    private String password;
 
-    String firstname;
-    String lastname;
+    private String firstname;
+    private String lastname;
 
-    String address;
+    private String address;
 
-    Double balance;
+    private Double balance;
 
-    boolean isAdmin;
+    private boolean isAdmin;
 
     public UserInfoDTO toUserInfoDTO() {
         return UserInfoDTO.builder()

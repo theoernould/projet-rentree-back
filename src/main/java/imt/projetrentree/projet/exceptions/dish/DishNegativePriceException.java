@@ -1,14 +1,10 @@
 package imt.projetrentree.projet.exceptions.dish;
-import imt.projetrentree.projet.models.enums.DishDiet;
-import jakarta.ws.rs.WebApplicationException;
+
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-import java.util.Arrays;
-
-public class DishNegativePriceException extends WebApplicationException {
-    public DishNegativePriceException(){
-        super(Response.status(Response.Status.BAD_REQUEST)
-                .entity("The dish price must be positive or zero")
-                .build());
+public class DishNegativePriceException extends CustomException {
+    public DishNegativePriceException() {
+        super(Response.Status.BAD_REQUEST, "The dish price must be positive or zero");
     }
 }

@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.order;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class OrderNotFoundException extends WebApplicationException {
+public class OrderNotFoundException extends CustomException {
     public OrderNotFoundException() {
-        super(Response.status(Response.Status.NOT_FOUND)
-                .entity("Order not found")
-                .build());
+        super(Response.Status.NOT_FOUND, "Order not found");
     }
 }

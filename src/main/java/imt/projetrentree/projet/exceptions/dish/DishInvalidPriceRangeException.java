@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.dish;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class DishInvalidPriceRangeException extends WebApplicationException {
-    public DishInvalidPriceRangeException(){
-        super(Response.status(Response.Status.BAD_REQUEST)
-                .entity("The dish price range is invalid")
-                .build());
+public class DishInvalidPriceRangeException extends CustomException {
+    public DishInvalidPriceRangeException() {
+        super(Response.Status.BAD_REQUEST, "The dish price range is invalid");
     }
 }

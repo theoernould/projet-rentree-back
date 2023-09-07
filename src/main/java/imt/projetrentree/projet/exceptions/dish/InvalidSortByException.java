@@ -1,14 +1,13 @@
 package imt.projetrentree.projet.exceptions.dish;
 
-import imt.projetrentree.projet.models.enums.DishDiet;
+import imt.projetrentree.projet.exceptions.CustomException;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
-import java.util.Arrays;
+import static imt.projetrentree.projet.services.UtilsService.getEnumKeysString;
 
-public class InvalidSortByException extends WebApplicationException {
-    public InvalidSortByException(String sortby) {
-        super(Response.status(Response.Status.NOT_FOUND).entity("The sort by " + sortby + " does not exist. Valid sort by are : " + Arrays.toString(DishSortingMethod.values())).build());
+public class InvalidSortByException extends CustomException {
+    public InvalidSortByException(String sortBy) {
+        super(Response.Status.NOT_FOUND, "The sort by " + sortBy + " does not exist. Valid sort by are : " + getEnumKeysString(DishSortingMethod.class));
     }
 }

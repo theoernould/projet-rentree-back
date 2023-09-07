@@ -19,13 +19,13 @@ import java.util.List;
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
-    String description;
-    String alergens;
-    String image;
-    List<DishTag> tags;
-    DishDiet diet;
-    Double price;
+    private String name;
+    private String description;
+    private String alergens;
+    private String image;
+    private List<DishTag> tags;
+    private DishDiet diet;
+    private Double price;
 }

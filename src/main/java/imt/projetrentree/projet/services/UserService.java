@@ -44,14 +44,18 @@ public class UserService {
             throw new InvalidEmailException();
         }
         if (userRepository.existsByEmailAndPassword(email, password)) {
-            User user = userRepository.findByEmailAndPassword(email, password);
-            verifyThatUserIsNotAlreadyAuthenticated(user);
-            String token = UUID.randomUUID().toString();
-            UserService.usersIds.put(token, user.getId());
-            return token;
+            return loginUser(email, password);
         } else {
             throw new BadCredentialsException();
         }
+    }
+
+    private String loginUser(String email, String password) {
+        User user = userRepository.findByEmailAndPassword(email, password);
+        verifyThatUserIsNotAlreadyAuthenticated(user);
+        String token = UUID.randomUUID().toString();
+        UserService.usersIds.put(token, user.getId());
+        return token;
     }
 
     public void resetPasswordSendMail(String email) {
@@ -119,7 +123,6 @@ public class UserService {
             User user = userRepository.findById(id).orElseThrow();
             if (user.getEmail().equals(email)) {
                 userToken.set(token);
-                return;
             }
         });
         return userToken.get();

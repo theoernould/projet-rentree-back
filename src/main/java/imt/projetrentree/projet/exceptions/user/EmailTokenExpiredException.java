@@ -1,14 +1,11 @@
 package imt.projetrentree.projet.exceptions.user;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class EmailTokenExpiredException extends WebApplicationException
-{
+public class EmailTokenExpiredException extends CustomException {
 
     public EmailTokenExpiredException() {
-        super(Response.status(Response.Status.UNAUTHORIZED)
-                .entity("The email token is invalid or expired")
-                .build());
+        super(Response.Status.UNAUTHORIZED, "The email token is invalid or expired");
     }
 }

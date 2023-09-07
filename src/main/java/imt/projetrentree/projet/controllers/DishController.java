@@ -3,14 +3,13 @@ package imt.projetrentree.projet.controllers;
 import imt.projetrentree.projet.annotations.AdminOnly;
 import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
-import imt.projetrentree.projet.dto.dish.DishFilterDTO;
+import imt.projetrentree.projet.dto.dish.DishFiltersDTO;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.enums.DishDiet;
 import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.services.DishService;
 import jakarta.annotation.Nullable;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
+
+import static imt.projetrentree.projet.services.UtilsService.getMapFromEnum;
 
 @Path("dishes")
 public class DishController {
@@ -28,34 +29,34 @@ public class DishController {
     @GET
     @Consumes("application/json")
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@Nullable @RequestBody DishFilterDTO dishFilterDTO) {
-        return dishService.getDishes(dishFilterDTO);
+    public List<Dish> getDishesByIds(@Nullable @RequestBody DishFiltersDTO dishFiltersDTO) {
+        return dishService.getDishes(dishFiltersDTO);
     }
 
     @GET
     @Produces("application/json")
-    @Path("/sortingmethods")
+    @Path("sortingMethods")
     public Map<DishSortingMethod, String> getDishSortingMethods() {
-        return dishService.getSortingMethods();
+        return getMapFromEnum(DishSortingMethod.class);
     }
 
     @GET
     @Produces("application/json")
-    @Path("/diets")
+    @Path("diets")
     public Map<DishDiet, String> getDishDiets() {
-        return dishService.getDiets();
+        return getMapFromEnum(DishDiet.class);
     }
 
     @GET
     @Produces("application/json")
-    @Path("/tags")
+    @Path("tags")
     public Map<DishTag, String> getDishTags() {
-        return dishService.getDishTags();
+        return getMapFromEnum(DishTag.class);
     }
 
     @GET
     @Produces("application/json")
-    @Path("/{id}")
+    @Path("{id}")
     public Dish getDishById(@NotNull @PathParam("id") Long id) {
         return dishService.getDishById(id);
     }
@@ -70,7 +71,7 @@ public class DishController {
     }
 
     @PATCH
-    @Path("/{id}")
+    @Path("{id}")
     @NeedToBeAuthenticated
     @AdminOnly
     @Consumes("application/json")
@@ -82,7 +83,7 @@ public class DishController {
     @DELETE
     @NeedToBeAuthenticated
     @AdminOnly
-    @Path("/{id}")
+    @Path("{id}")
     public void deleteDish(@NotNull @PathParam("id") final Long id) {
         dishService.deleteDish(id);
     }

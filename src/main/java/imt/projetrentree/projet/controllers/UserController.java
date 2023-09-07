@@ -1,8 +1,8 @@
 package imt.projetrentree.projet.controllers;
 
 import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
-import imt.projetrentree.projet.dto.user.UserCredentialsDTO;
 import imt.projetrentree.projet.dto.user.UserCreationDTO;
+import imt.projetrentree.projet.dto.user.UserCredentialsDTO;
 import imt.projetrentree.projet.dto.user.UserInfoDTO;
 import imt.projetrentree.projet.services.UserService;
 import jakarta.ws.rs.*;
@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GET
-    @Path("/info")
+    @Path("info")
     @Produces("application/json")
     @NeedToBeAuthenticated
     public UserInfoDTO info() {
@@ -53,7 +53,6 @@ public class UserController {
     public void resetPassword(@QueryParam("token") String token, @QueryParam("password") String password) {
         userService.resetPassword(token, password);
     }
-
 
 
     @POST

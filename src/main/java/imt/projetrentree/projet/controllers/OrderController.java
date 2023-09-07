@@ -4,11 +4,13 @@ import imt.projetrentree.projet.annotations.NeedToBeAuthenticated;
 import imt.projetrentree.projet.dto.order.OrderCreationDTO;
 import imt.projetrentree.projet.dto.order.OrderDTO;
 import imt.projetrentree.projet.dto.order.OrderDetailDTO;
+import imt.projetrentree.projet.dto.order.OrderFiltersDTO;
 import imt.projetrentree.projet.models.Order;
 import imt.projetrentree.projet.models.User;
 import imt.projetrentree.projet.models.enums.OrderSortingMethod;
 import imt.projetrentree.projet.services.OrderService;
 import imt.projetrentree.projet.services.UserService;
+import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
+
+import static imt.projetrentree.projet.services.UtilsService.getMapFromEnum;
 
 @Path("orders")
 public class OrderController {
@@ -29,16 +33,16 @@ public class OrderController {
     @NeedToBeAuthenticated
     @Produces("application/json")
     @Transactional
-    public List<OrderDTO> getOrdersOfUser(@QueryParam("sortingMethod") @DefaultValue("DATE") String sortingMethod, @QueryParam("sortingOrder") @DefaultValue("ASC") String sortingOrder) {
+    public List<OrderDTO> getOrdersOfUser(@Nullable @RequestBody OrderFiltersDTO filtersDTO) {
         User user = userService.getCurrentUser();
-        return orderService.getOrders(user, sortingMethod, sortingOrder).stream().map(Order::toDTO).toList();
+        return orderService.getOrders(user, filtersDTO).stream().map(Order::toDTO).toList();
     }
 
     @GET
     @Produces("application/json")
-    @Path("/sortingmethods")
-    public Map<OrderSortingMethod,String> getOrderSortingMethods(){
-        return orderService.getOrderSortingMethods();
+    @Path("sortingMethods")
+    public Map<OrderSortingMethod, String> getOrderSortingMethods() {
+        return getMapFromEnum(OrderSortingMethod.class);
     }
 
     @GET

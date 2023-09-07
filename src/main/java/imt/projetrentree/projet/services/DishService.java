@@ -1,7 +1,7 @@
 package imt.projetrentree.projet.services;
 
 import imt.projetrentree.projet.dto.dish.DishCreationDTO;
-import imt.projetrentree.projet.dto.dish.DishFilterDTO;
+import imt.projetrentree.projet.dto.dish.DishFiltersDTO;
 import imt.projetrentree.projet.exceptions.dish.*;
 import imt.projetrentree.projet.models.Dish;
 import imt.projetrentree.projet.models.DishFilters;
@@ -10,17 +10,18 @@ import imt.projetrentree.projet.models.enums.DishSortingMethod;
 import imt.projetrentree.projet.models.enums.DishTag;
 import imt.projetrentree.projet.models.enums.SortingOrder;
 import imt.projetrentree.projet.repositories.DishRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class DishService {
-    private final DishRepository dishRepository;
+    @Autowired
+    private DishRepository dishRepository;
 
     public Dish getDishById(Long id) {
         Optional<Dish> d = dishRepository.findById(id);
@@ -28,13 +29,13 @@ public class DishService {
         return d.get();
     }
 
-    public List<Dish> getDishes(DishFilterDTO dishFilterDTO) {
+    public List<Dish> getDishes(DishFiltersDTO dishFiltersDTO) {
         List<Dish> dishes = dishRepository.findAll();
-        return Objects.isNull(dishFilterDTO) ? dishes : filterDishes(dishFilterDTO);
+        return Objects.isNull(dishFiltersDTO) ? dishes : filterDishes(dishFiltersDTO);
     }
 
-    private List<Dish> filterDishes(DishFilterDTO dishFilterDTO) {
-        DishFilters dishFilters = dishFilterDTO.toDishFilters();
+    private List<Dish> filterDishes(DishFiltersDTO dishFiltersDTO) {
+        DishFilters dishFilters = dishFiltersDTO.toDishFilters();
         verifyFilters(dishFilters);
         List<DishDiet> diets = dishFilters.getDiets();
         List<DishTag> tags = dishFilters.getTags();
@@ -78,37 +79,13 @@ public class DishService {
         return order == SortingOrder.ASC ? comparator : comparator.reversed();
     }
 
-    public Map<DishDiet,String> getDiets(){
-        Map<DishDiet,String> map = new HashMap<>();
-        for (DishDiet dishDiet : DishDiet.values()) {
-            map.put(dishDiet, dishDiet.getLabel());
-        }
-        return map;
-    }
-
-    public Map<DishTag,String> getDishTags(){
-        Map<DishTag,String> map = new HashMap<>();
-        for (DishTag dishtag : DishTag.values()) {
-            map.put(dishtag, dishtag.getLabel());
-        }
-        return map;
-    }
-
-    public Map<DishSortingMethod,String> getSortingMethods(){
-        Map<DishSortingMethod,String> map = new HashMap<>();
-        for (DishSortingMethod dishSortingMethod : DishSortingMethod.values()) {
-            map.put(dishSortingMethod, dishSortingMethod.getLabel());
-        }
-        return map;
-    }
-
     public void createDish(DishCreationDTO dish) {
-        if (dish.getPrice()<0) throw new DishNegativePriceException();
+        if (dish.getPrice() < 0) throw new DishNegativePriceException();
         dishRepository.save(dish.toDish());
     }
 
     public void updateDish(Long id, DishCreationDTO updatedCreationDish) {
-        if (updatedCreationDish.getPrice()<0) throw new DishNegativePriceException();
+        if (updatedCreationDish.getPrice() < 0) throw new DishNegativePriceException();
         Optional<Dish> optionalDish = dishRepository.findById(id);
         if (optionalDish.isEmpty()) {
             throw new DishNotFoundException();

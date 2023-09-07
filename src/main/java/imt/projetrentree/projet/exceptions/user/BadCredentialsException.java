@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.user;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class BadCredentialsException extends WebApplicationException {
+public class BadCredentialsException extends CustomException {
     public BadCredentialsException() {
-        super(Response.status(Response.Status.UNAUTHORIZED)
-                .entity("Bad credentials")
-                .build());
+        super(Response.Status.UNAUTHORIZED, "Bad credentials");
     }
 }

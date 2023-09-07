@@ -1,14 +1,13 @@
 package imt.projetrentree.projet.exceptions.dish;
+
+import imt.projetrentree.projet.exceptions.CustomException;
 import imt.projetrentree.projet.models.enums.DishDiet;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
-import java.util.Arrays;
+import static imt.projetrentree.projet.services.UtilsService.getEnumKeysString;
 
-public class DishDietDoesNotExistException extends WebApplicationException {
-    public DishDietDoesNotExistException(String diet){
-        super(Response.status(Response.Status.NOT_FOUND)
-                .entity("The dish diet "+diet+" does not exist. Valid categories are : "+ Arrays.toString(DishDiet.values()))
-                .build());
+public class DishDietDoesNotExistException extends CustomException {
+    public DishDietDoesNotExistException(String diet) {
+        super(Response.Status.NOT_FOUND, "The dish diet " + diet + " does not exist. Valid categories are : " + getEnumKeysString(DishDiet.class));
     }
 }

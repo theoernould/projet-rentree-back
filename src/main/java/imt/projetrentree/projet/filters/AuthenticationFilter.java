@@ -13,7 +13,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -42,7 +41,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
             User userAuthenticated = getUserService().getUserById(UserService.usersIds.get(token));
 
-            if(method.isAnnotationPresent(AdminOnly.class) && !userAuthenticated.isAdmin()) {
+            if (method.isAnnotationPresent(AdminOnly.class) && !userAuthenticated.isAdmin()) {
                 requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Only admins can access this !").build());
                 return;
             }

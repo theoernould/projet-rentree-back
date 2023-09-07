@@ -16,16 +16,16 @@ import java.util.List;
 @Data
 @Builder
 public class DishCreationDTO {
-    String name;
-    String description;
-    String alergens;
-    String image;
-    List<String> tags;
-    String diet;
+    private String name;
+    private String description;
+    private String alergens;
+    private String image;
+    private List<String> tags;
+    private String diet;
 
     @NotNull(message = "Price is mandatory")
     @PositiveOrZero(message = "Price must be positive or zero")
-    Double price;
+    private Double price;
 
     public Dish toDish() {
         return Dish.builder()
@@ -41,9 +41,9 @@ public class DishCreationDTO {
 
     public DishDiet ifDietNotExistThrow(String diet) {
         if (diet == null || diet.isEmpty()) throw new DishDietDoesNotExistException("null");
-        try{
+        try {
             return DishDiet.valueOf(diet);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new DishDietDoesNotExistException(diet);
         }
     }

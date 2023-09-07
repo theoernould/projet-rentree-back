@@ -15,13 +15,13 @@ public class UserCreationDTO {
 
     public User toUser(Double balance) {
         return User.builder()
-            .email(email)
-            .password(password)
-            .firstname(firstname)
-            .lastname(lastname)
-            .balance(balance)
-            .address(address)
-            .isAdmin(false)
-            .build();
+                .email(email)
+                .password(password)
+                .firstname(firstname)
+                .lastname(lastname)
+                .balance(balance)
+                .address(address)
+                .isAdmin(false)
+                .build();
     }
 }

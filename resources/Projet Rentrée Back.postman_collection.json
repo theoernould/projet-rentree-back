@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "59fecea7-093e-481e-a104-13c641092291",
+		"_postman_id": "18b94456-29c9-4df2-9efb-e39885e490f7",
 		"name": "Projet Rentrée Back",
 		"description": "Cette collection contient toutes les requêtes utiles à faire à l'API Rest de notre projet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -189,13 +189,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/dishes/sortingmethods",
+							"raw": "{{base_url}}/dishes/sortingMethods",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"dishes",
-								"sortingmethods"
+								"sortingMethods"
 							]
 						},
 						"description": "Permet de recuperer la liste des méthode de tri des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"PRICE\": \"Price\",\n    \"NAME\": \"Name\"\n}\n\n ```"
@@ -357,13 +357,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/users/resetpassword?token=d54014d7-5ffd-48f2-960e-a48efd395c92&password=testtest",
+							"raw": "{{base_url}}/users/resetPassword?token=d54014d7-5ffd-48f2-960e-a48efd395c92&password=testtest",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"resetpassword"
+								"resetPassword"
 							],
 							"query": [
 								{
@@ -500,13 +500,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/orders/sortingmethods",
+							"raw": "{{base_url}}/orders/sortingMethods",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"orders",
-								"sortingmethods"
+								"sortingMethods"
 							]
 						},
 						"description": "Permet de recuperer les modes de tris des commandes aisin que leurs labels associés.\n\n``` json\n{\n    \"DATE\": \"Date\",\n    \"PRICE\": \"Price\"\n}\n\n ```"
@@ -522,16 +522,30 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/main/sortingorders",
+					"raw": "{{base_url}}/main/sortingOrders",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"main",
-						"sortingorders"
+						"sortingOrders"
 					]
 				},
 				"description": "Permet de recuperer les modes de tri (ascendant ou descendant) ainsi que leurs labels associés.\n\n``` json\n{\n    \"DESC\": \"Descending\",\n    \"ASC\": \"Ascending\"\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "StatusRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
 			},
 			"response": []
 		}

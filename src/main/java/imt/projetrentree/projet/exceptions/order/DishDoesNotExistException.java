@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.order;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class DishDoesNotExistException extends WebApplicationException {
+public class DishDoesNotExistException extends CustomException {
     public DishDoesNotExistException(Long id) {
-        super(Response.status(Response.Status.NOT_FOUND)
-                .entity("Dish " + id + "does not exist")
-                .build());
+        super(Response.Status.NOT_FOUND, "Dish " + id + "does not exist");
     }
 }

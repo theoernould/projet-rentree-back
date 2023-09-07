@@ -1,12 +1,10 @@
 package imt.projetrentree.projet.exceptions.user;
 
-import jakarta.ws.rs.WebApplicationException;
+import imt.projetrentree.projet.exceptions.CustomException;
 import jakarta.ws.rs.core.Response;
 
-public class InvalidEmailException extends WebApplicationException {
+public class InvalidEmailException extends CustomException {
     public InvalidEmailException() {
-        super(Response.status(Response.Status.BAD_REQUEST)
-                .entity("The email is not valid")
-                .build());
+        super(Response.Status.BAD_REQUEST, "The email is not valid");
     }
 }
