@@ -42,14 +42,12 @@ public class UserController {
 
     @GET
     @Path("resetPasswordMail")
-    @Consumes("application/json")
     public void resetPasswordMal(@QueryParam("email") String email) {
         userService.resetPasswordSendMail(email);
     }
 
     @GET
     @Path("resetPassword")
-    @Consumes("application/json")
     public void resetPassword(@QueryParam("token") String token, @QueryParam("password") String password) {
         userService.resetPassword(token, password);
     }

@@ -35,7 +35,7 @@ public class EmailService {
 
             helper.setText(emailContent, true);
 
-            helper.setFrom("n79880215@gmail.com", APP_NAME + " no reply");
+            helper.setFrom("n79880215@gmail.com", APP_NAME + " |  no-reply");
 
             emailSender.send(message);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class EmailService {
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
 
-        sendMail(user.getEmail(), "Welcome to " + APP_NAME + "!", "welcome", context);
+        sendMail(user.getEmail(), "Welcome to " + APP_NAME + " !", "welcome", context);
     }
 
     public void sendOrderSummaryEmail(OrderSummaryDTO orderSummaryDTO) {

@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static imt.projetrentree.projet.ProjetApplication.APP_NAME;
+import static imt.projetrentree.projet.services.UtilsService.getMapFromEnum;
 
 @Path("")
 public class MainController {
 
     @GET
-    @Path("")
     public String status() {
         return APP_NAME + " API is running";
     }
@@ -24,10 +24,6 @@ public class MainController {
     @Path("main/sortingOrders")
     @Produces("application/json")
     public Map<SortingOrder, String> getSortingMethods() {
-        Map<SortingOrder, String> map = new HashMap<>();
-        for (SortingOrder sortingOrder : SortingOrder.values()) {
-            map.put(sortingOrder, sortingOrder.getLabel());
-        }
-        return map;
+        return getMapFromEnum(SortingOrder.class);
     }
 }

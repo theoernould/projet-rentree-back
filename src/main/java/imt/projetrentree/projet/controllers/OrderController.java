@@ -30,8 +30,9 @@ public class OrderController {
     private UserService userService;
 
     @GET
-    @NeedToBeAuthenticated
+    @Consumes("application/json")
     @Produces("application/json")
+    @NeedToBeAuthenticated
     @Transactional
     public List<OrderDTO> getOrdersOfUser(@Nullable @RequestBody OrderFiltersDTO filtersDTO) {
         User user = userService.getCurrentUser();
@@ -39,22 +40,23 @@ public class OrderController {
     }
 
     @GET
-    @Produces("application/json")
     @Path("sortingMethods")
+    @Produces("application/json")
     public Map<OrderSortingMethod, String> getOrderSortingMethods() {
         return getMapFromEnum(OrderSortingMethod.class);
     }
 
     @GET
     @Path("{id}")
-    @NeedToBeAuthenticated
     @Produces("application/json")
+    @NeedToBeAuthenticated
     @Transactional
     public OrderDetailDTO getOrderById(@PathParam("id") Long id) {
         return orderService.getOrderById(id).toOrderDetailDTO();
     }
 
     @POST
+    @Consumes("application/json")
     @NeedToBeAuthenticated
     public void createOrder(@RequestBody OrderCreationDTO orderCreationDTO) {
         User user = userService.getCurrentUser();

@@ -34,56 +34,56 @@ public class DishController {
     }
 
     @GET
-    @Produces("application/json")
     @Path("sortingMethods")
+    @Produces("application/json")
     public Map<DishSortingMethod, String> getDishSortingMethods() {
         return getMapFromEnum(DishSortingMethod.class);
     }
 
     @GET
-    @Produces("application/json")
     @Path("diets")
+    @Produces("application/json")
     public Map<DishDiet, String> getDishDiets() {
         return getMapFromEnum(DishDiet.class);
     }
 
     @GET
-    @Produces("application/json")
     @Path("tags")
+    @Produces("application/json")
     public Map<DishTag, String> getDishTags() {
         return getMapFromEnum(DishTag.class);
     }
 
     @GET
-    @Produces("application/json")
     @Path("{id}")
+    @Produces("application/json")
     public Dish getDishById(@NotNull @PathParam("id") Long id) {
         return dishService.getDishById(id);
     }
 
 
     @POST
+    @Consumes("application/json")
     @NeedToBeAuthenticated
     @AdminOnly
-    @Consumes("application/json")
     public void createDish(@NotNull @RequestBody DishCreationDTO dish) {
         dishService.createDish(dish);
     }
 
     @PATCH
     @Path("{id}")
+    @Consumes("application/json")
     @NeedToBeAuthenticated
     @AdminOnly
-    @Consumes("application/json")
     public void updateDish(@NotNull @PathParam("id") Long id, @RequestBody DishCreationDTO updatedDish) {
         dishService.updateDish(id, updatedDish);
     }
 
 
     @DELETE
+    @Path("{id}")
     @NeedToBeAuthenticated
     @AdminOnly
-    @Path("{id}")
     public void deleteDish(@NotNull @PathParam("id") final Long id) {
         dishService.deleteDish(id);
     }
