@@ -29,8 +29,14 @@ public class DishController {
     @GET
     @Consumes("application/json")
     @Produces("application/json")
-    public List<Dish> getDishesByIds(@Nullable @RequestBody DishFiltersDTO dishFiltersDTO) {
-        return dishService.getDishes(dishFiltersDTO);
+    public List<Dish> getDishesByIds(@QueryParam("search") @DefaultValue("") String searchTerm,
+                                     @QueryParam("lowerPrice") @DefaultValue("0.0") String lowerPrice,
+                                     @QueryParam("upperPrice") @DefaultValue("999.0") String upperPrice,
+                                     @QueryParam("diets") String diets,
+                                     @QueryParam("tags") String tags,
+                                     @QueryParam("sortBy") @DefaultValue("ID") String sortBy,
+                                     @QueryParam("sortOrder") @DefaultValue("ASC") String sortOrder) {
+        return dishService.getDishes(searchTerm, lowerPrice, upperPrice, diets, tags, sortBy, sortOrder);
     }
 
     @GET

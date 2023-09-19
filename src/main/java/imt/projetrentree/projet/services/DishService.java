@@ -13,10 +13,8 @@ import imt.projetrentree.projet.repositories.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class DishService {
@@ -29,9 +27,48 @@ public class DishService {
         return d.get();
     }
 
-    public List<Dish> getDishes(DishFiltersDTO dishFiltersDTO) {
-        List<Dish> dishes = dishRepository.findAll();
-        return Objects.isNull(dishFiltersDTO) ? dishes : filterDishes(dishFiltersDTO);
+    public List<Dish> getDishes(String searchTerm,
+                                String lowerPrice,
+                                String upperPrice,
+                                String diets,
+                                String tags,
+                                String sortBy,
+                                String sortOrder) {
+        DishFiltersDTO dishFilterDTO = getDishFilterDTO(searchTerm, lowerPrice, upperPrice, diets, tags, sortBy, sortOrder);
+        return filterDishes(dishFilterDTO);
+    }
+
+    private DishFiltersDTO getDishFilterDTO(String searchTerm,
+                                           String lowerPrice,
+                                           String upperPrice,
+                                           String diets,
+                                           String tags,
+                                           String sortBy,
+                                           String sortOrder) {
+        List<String> dietsDefault = Stream.of(DishDiet.values()).map(Enum::name).toList();
+        List<String> tagsDefault = Stream.of(DishTag.values()).map(Enum::name).toList();
+        return DishFiltersDTO.builder()
+                .searchText(searchTerm)
+                .lowerPrice(lowerPrice)
+                .upperPrice(upperPrice)
+                .sortBy(sortBy)
+                .sortOrder(sortOrder)
+                .diets(getStringListFromStrings(diets, dietsDefault, () -> {
+                    throw new DishDietDoesNotExistException();
+                }))
+                .tags(getStringListFromStrings(tags, tagsDefault, () -> {
+                    throw new DishTagDoesNotExistException();
+                }))
+                .build();
+    }
+
+    private List<String> getStringListFromStrings(String str, List<String> defaultList, Runnable exception) {
+        try {
+            return Objects.isNull(str) || str.isEmpty() ? defaultList : Arrays.asList(str.split(","));
+        } catch (Exception e) {
+            exception.run();
+        }
+        return defaultList;
     }
 
     private List<Dish> filterDishes(DishFiltersDTO dishFiltersDTO) {

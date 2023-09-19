@@ -40,11 +40,11 @@ public class DishCreationDTO {
     }
 
     public DishDiet ifDietNotExistThrow(String diet) {
-        if (diet == null || diet.isEmpty()) throw new DishDietDoesNotExistException("null");
+        if (diet == null || diet.isEmpty()) throw new DishDietDoesNotExistException();
         try {
             return DishDiet.valueOf(diet);
         } catch (IllegalArgumentException e) {
-            throw new DishDietDoesNotExistException(diet);
+            throw new DishDietDoesNotExistException();
         }
     }
 
@@ -54,7 +54,7 @@ public class DishCreationDTO {
             try {
                 return DishTag.valueOf(s);
             } catch (IllegalArgumentException e) {
-                throw new DishTagDoesNotExistException(s);
+                throw new DishTagDoesNotExistException();
             }
         }).toList();
     }

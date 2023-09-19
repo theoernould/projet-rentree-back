@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.Response;
 import static imt.projetrentree.projet.services.UtilsService.getEnumKeysString;
 
 public class DishTagDoesNotExistException extends CustomException {
-    public DishTagDoesNotExistException(String tag) {
-        super(Response.Status.NOT_FOUND, "The dish tag " + tag + " does not exist. Valid categories are : " + getEnumKeysString(DishTag.class));
+    public DishTagDoesNotExistException() {
+        super(Response.Status.NOT_FOUND, "The dish  tag  does not exist. Valid categories are : " + getEnumKeysString(DishTag.class));
     }
 }
