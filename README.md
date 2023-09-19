@@ -47,6 +47,6 @@ Pour importer la collection, il suffit de cliquer sur "Import" dans Postman et d
 
 ## Documentation
 
-La documentation de l'API est accesible directement dans la collection Postman fournie ou via ![ce lien](https://documenter.getpostman.com/view/20203369/2s9YBz2EtY).
+La documentation de l'API est accesible directement dans la collection Postman fournie.
 
 ![image](resources/postman_documentation.png)

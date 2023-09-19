@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "18b94456-29c9-4df2-9efb-e39885e490f7",
+		"_postman_id": "cd36351f-fd10-4b03-95fd-167c9a11e23d",
 		"name": "Projet Rentrée Back",
 		"description": "Cette collection contient toutes les requêtes utiles à faire à l'API Rest de notre projet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20203369"
+		"_exporter_id": "20210699"
 	},
 	"item": [
 		{
@@ -304,13 +304,7 @@
 					"name": "Logout",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{user_token}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{base_url}}/users/logout",
 							"host": [
@@ -395,13 +389,7 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{user_token}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -440,13 +428,7 @@
 					"name": "AddOrder",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{user_token}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"orderContent\": {\r\n        \"3\":1,\r\n        \"4\":2\r\n    },\r\n    \"address\": \"address\"\r\n}",
@@ -473,13 +455,7 @@
 					"name": "GetOrderDetail",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{user_token}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{base_url}}/orders/1",
 							"host": [
