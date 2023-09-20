@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bbb8e7a8-e000-4183-91f6-357f5500bdd0",
+		"_postman_id": "9d36000e-726a-4fc6-a83c-9696c6df2748",
 		"name": "Projet Rentrée Back",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20203369"
+		"_exporter_id": "20210699"
 	},
 	"item": [
 		{
@@ -12,15 +12,45 @@
 				{
 					"name": "GetAllDishes",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/dishes",
+							"raw": "{{base_url}}/dishes?search=&lowerPrice=0&upperPrice=999&diets=&tags=&sortBy=ID&sortOrder=ASC",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"dishes"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "lowerPrice",
+									"value": "0"
+								},
+								{
+									"key": "upperPrice",
+									"value": "999"
+								},
+								{
+									"key": "diets",
+									"value": ""
+								},
+								{
+									"key": "tags",
+									"value": ""
+								},
+								{
+									"key": "sortBy",
+									"value": "ID"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								}
 							]
 						}
 					},
@@ -275,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"noe.delcroix59@gmail.com\",\r\n    \"password\":\"testtest\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -439,12 +469,22 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/orders",
+							"raw": "{{base_url}}/orders?sortBy=PRICE&sortOrder=ASC",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"orders"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "PRICE"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								}
 							]
 						}
 					},
@@ -512,13 +552,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/orders/sortingmethods",
+							"raw": "{{base_url}}/orders/sortingMethods",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"orders",
-								"sortingmethods"
+								"sortingMethods"
 							]
 						}
 					},
@@ -532,13 +572,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/main/sortingorders",
+					"raw": "{{base_url}}/main/sortingOrders",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"main",
-						"sortingorders"
+						"sortingOrders"
 					]
 				}
 			},

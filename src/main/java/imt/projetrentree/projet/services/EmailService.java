@@ -46,7 +46,7 @@ public class EmailService {
 
     @Async
     public void sendChangePasswordEmail(String token, String email) {
-        String urlWithToken = "https://localhost:19006?token=" + token;
+        String urlWithToken = "http://localhost:19006/ChangePassword?token=" + token;
 
         Context context = new Context();
         context.setVariable("url", urlWithToken);

@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -34,8 +35,12 @@ public class OrderController {
     @Produces("application/json")
     @NeedToBeAuthenticated
     @Transactional
-    public List<OrderDTO> getOrdersOfUser(@Nullable @RequestBody OrderFiltersDTO filtersDTO) {
+    public List<OrderDTO> getOrdersOfUser(
+            @QueryParam("sortBy") @DefaultValue("DATE") String sortingMethod,
+            @QueryParam("sortOrder") @DefaultValue("ASC") String sortingOrder) {
+
         User user = userService.getCurrentUser();
+        OrderFiltersDTO filtersDTO = new OrderFiltersDTO(sortingMethod, sortingOrder);
         return orderService.getOrders(user, filtersDTO).stream().map(Order::toDTO).toList();
     }
 

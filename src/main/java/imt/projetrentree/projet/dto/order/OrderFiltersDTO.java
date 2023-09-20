@@ -9,8 +9,13 @@ import static imt.projetrentree.projet.services.UtilsService.convertToEnum;
 
 @Data
 public class OrderFiltersDTO {
-    private String sortingMethod = OrderSortingMethod.DATE.name();
-    private String sortingOrder = SortingOrder.ASC.name();
+    private String sortingMethod;
+    private String sortingOrder;
+
+    public OrderFiltersDTO(String sortingMethod, String sortingOrder) {
+        this.sortingMethod = sortingMethod;
+        this.sortingOrder = sortingOrder;
+    }
 
     public OrderFilters toOrderFilters() {
         return OrderFilters.builder()
