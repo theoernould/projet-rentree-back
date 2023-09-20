@@ -59,6 +59,13 @@ public class UserController {
         userService.resetPassword(token, password);
     }
 
+    @GET
+    @NeedToBeAuthenticated
+    @Path("resetPasswordAuthentificated")
+    public void resetPasswordAuthentificated(@QueryParam("oldPassword") String oldPassword, @QueryParam("password") String password) {
+        userService.resetPasswordAuthentificated(oldPassword, password);
+    }
+
 
     @POST
     @Path("register")

@@ -37,7 +37,7 @@ public class OrderController {
     @Transactional
     public List<OrderDTO> getOrdersOfUser(
             @QueryParam("sortBy") @DefaultValue("DATE") String sortingMethod,
-            @QueryParam("sortOrder") @DefaultValue("ASC") String sortingOrder) {
+            @QueryParam("sortOrder") @DefaultValue("DESC") String sortingOrder) {
 
         User user = userService.getCurrentUser();
         OrderFiltersDTO filtersDTO = new OrderFiltersDTO(sortingMethod, sortingOrder);

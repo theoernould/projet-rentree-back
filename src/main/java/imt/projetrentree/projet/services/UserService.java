@@ -84,6 +84,19 @@ public class UserService {
         }
     }
 
+    public void resetPasswordAuthentificated(String oldPassword, String newPassword){
+        User user = getCurrentUser();
+        if (!user.getPassword().equals(oldPassword)){
+            throw new BadCredentialsException();
+        }
+        if (oldPassword.equals(newPassword)){
+            throw new SamePasswordException();
+        }
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        emailService.sendPasswordChangeConfirmationEmail(user);
+    }
+
     private void verifyThatUserIsNotAlreadyAuthenticated(User user) {
         if (UserService.usersIds.values().stream().anyMatch(id -> id.equals(user.getId()))) {
             throw new AlreadyAuthenticatedException();
