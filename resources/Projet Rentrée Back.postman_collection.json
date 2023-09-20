@@ -378,7 +378,7 @@
 				{
 					"name": "ResetPassword",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "{{base_url}}/users/resetPassword?token=d54014d7-5ffd-48f2-960e-a48efd395c92&password=testtest",
@@ -407,7 +407,7 @@
 					"response": []
 				},
 				{
-					"name": "ResetPasswordAuthetificated",
+					"name": "ResetPasswordAuthentificated",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -432,6 +432,31 @@
 							]
 						},
 						"description": "Permet à l'utilisateur authetifié de changer son mot de passe"
+					},
+					"response": []
+				},
+				{
+					"name": "ResetTokenValid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/resetTokenValid?token=0d7766de-eac8-450f-9e3a-91732dbf7634",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"resetTokenValid"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "0d7766de-eac8-450f-9e3a-91732dbf7634"
+								}
+							]
+						},
+						"description": "Permet de verifier si un token de réinitialisation de mot de passe est toujours valide."
 					},
 					"response": []
 				}

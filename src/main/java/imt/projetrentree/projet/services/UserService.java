@@ -78,10 +78,15 @@ public class UserService {
             user.setPassword(password);
             userRepository.save(user);
             disconnectUser(email);
+            resetPasswordTokens.remove(token);
             emailService.sendPasswordChangeConfirmationEmail(user);
         } else {
             throw new EmailTokenExpiredException();
         }
+    }
+
+    public boolean resetTokenValid(String token){
+        return resetPasswordTokens.containsKey(token);
     }
 
     public void resetPasswordAuthentificated(String oldPassword, String newPassword){

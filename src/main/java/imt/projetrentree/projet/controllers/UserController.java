@@ -60,6 +60,13 @@ public class UserController {
     }
 
     @GET
+    @Path ("resetTokenValid")
+    @Produces("application/json")
+    public boolean resetTokenValid(@QueryParam("token") String token) {
+        return userService.resetTokenValid(token);
+    }
+
+    @GET
     @NeedToBeAuthenticated
     @Path("resetPasswordAuthentificated")
     public void resetPasswordAuthentificated(@QueryParam("oldPassword") String oldPassword, @QueryParam("password") String password) {
