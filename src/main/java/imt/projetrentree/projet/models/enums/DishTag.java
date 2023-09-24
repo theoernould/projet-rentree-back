@@ -6,13 +6,13 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum DishTag {
-    MEAT("Meat"),
-    FISH("Fish"),
-    VEGETABLE("Vegetable"),
+    MEAT("Viande"),
+    FISH("Poisson"),
+    VEGETABLE("Legume"),
     DESSERT("Dessert"),
-    DRINK("Drink"),
+    DRINK("Boisson"),
     HEALTHY("Healthy"),
-    OTHER("Other");
+    OTHER("Autre");
 
     private final String label;
 }

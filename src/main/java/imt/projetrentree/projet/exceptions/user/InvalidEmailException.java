@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class InvalidEmailException extends CustomException {
     public InvalidEmailException() {
-        super(Response.Status.BAD_REQUEST, "The email is not valid");
+        super(Response.Status.BAD_REQUEST, "L'adresse email saisie est invalide");
     }
 }

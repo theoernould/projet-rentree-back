@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum OrderSortingMethod {
-    DATE("Date"), PRICE("Price");
+    DATE("Date"), PRICE("Prix");
 
     private final String label;
 

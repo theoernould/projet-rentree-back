@@ -17,7 +17,7 @@ public class MainController {
 
     @GET
     public String status() {
-        return APP_NAME + " API is running";
+        return APP_NAME + " API est lancée !";
     }
 
     @GET

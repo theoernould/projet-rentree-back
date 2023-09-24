@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class DishInvalidSearchTextException extends CustomException {
     public DishInvalidSearchTextException() {
-        super(Response.Status.BAD_REQUEST, "Invalid search text length (must be between 0 and 50)");
+        super(Response.Status.BAD_REQUEST, "Le texte de recherche doit contenir moins de 50 caractères.");
     }
 }

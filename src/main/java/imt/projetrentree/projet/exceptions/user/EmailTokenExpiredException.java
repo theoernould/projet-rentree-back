@@ -6,6 +6,6 @@ import jakarta.ws.rs.core.Response;
 public class EmailTokenExpiredException extends CustomException {
 
     public EmailTokenExpiredException() {
-        super(Response.Status.UNAUTHORIZED, "The email token is invalid or expired");
+        super(Response.Status.UNAUTHORIZED, "Le token d'email est invalide ou a expiré");
     }
 }

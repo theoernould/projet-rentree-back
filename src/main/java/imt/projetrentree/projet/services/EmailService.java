@@ -51,7 +51,7 @@ public class EmailService {
         Context context = new Context();
         context.setVariable("url", urlWithToken);
 
-        sendMail(email, "It seems you forgot your password. Click here to reset it.", "resetPassword", context);
+        sendMail(email, "On dirait que vous avec oublié votre mot de passe. Pas de soucis, cliquez ici pour le réinitialiser.", "resetPassword", context);
     }
 
     @Async
@@ -60,7 +60,7 @@ public class EmailService {
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
 
-        sendMail(user.getEmail(), "Password Change Confirmation", "passwordChangeConfirmation", context);
+        sendMail(user.getEmail(), "Confirmation de changement de mot de passe", "passwordChangeConfirmation", context);
     }
 
     @Async
@@ -69,7 +69,7 @@ public class EmailService {
         context.setVariable("firstname", user.getFirstname());
         context.setVariable("lastname", user.getLastname());
 
-        sendMail(user.getEmail(), "Welcome to " + APP_NAME + " !", "welcome", context);
+        sendMail(user.getEmail(), "Bienvenue sur " + APP_NAME + " !", "welcome", context);
     }
 
     @Async
@@ -80,7 +80,7 @@ public class EmailService {
         context.setVariable("orderTotalPrice", orderSummaryDTO.getTotalPrice());
         context.setVariable("address", orderSummaryDTO.getAddress());
 
-        sendMail(orderSummaryDTO.getUser().getEmail(), "Your Order Summary", "orderConfirmation", context);
+        sendMail(orderSummaryDTO.getUser().getEmail(), "Résumé de votre commande", "orderConfirmation", context);
     }
 
 }

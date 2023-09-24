@@ -35,14 +35,14 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String token = cookie != null ? cookie.getValue() : null;
 
             if (token == null || !isValidToken(token)) {
-                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("User not authenticated").build());
+                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Aucun utilisateur connecté").build());
                 return;
             }
 
             User userAuthenticated = getUserService().getUserById(UserService.usersIds.get(token));
 
             if (method.isAnnotationPresent(AdminOnly.class) && !userAuthenticated.isAdmin()) {
-                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Only admins can access this !").build());
+                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Seuls les utilisateurs avec les permissions d'administrateurs peuvent accéder à cette ressource").build());
                 return;
             }
 

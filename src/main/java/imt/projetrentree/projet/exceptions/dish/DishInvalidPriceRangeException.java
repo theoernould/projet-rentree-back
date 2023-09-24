@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class DishInvalidPriceRangeException extends CustomException {
     public DishInvalidPriceRangeException() {
-        super(Response.Status.BAD_REQUEST, "The dish price range is invalid");
+        super(Response.Status.BAD_REQUEST, "Le prix minimum d'un plat doit être inférieur au prix maximum.");
     }
 }

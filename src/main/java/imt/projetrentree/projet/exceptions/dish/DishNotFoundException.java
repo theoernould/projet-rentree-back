@@ -6,6 +6,6 @@ import jakarta.ws.rs.core.Response;
 
 public class DishNotFoundException extends CustomException {
     public DishNotFoundException() {
-        super(Response.Status.NOT_FOUND, "The dish does not exist");
+        super(Response.Status.NOT_FOUND, "Ce plat n'existe pas");
     }
 }

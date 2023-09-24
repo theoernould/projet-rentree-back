@@ -9,23 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Configuration
-@ApplicationPath("api") // Spécifiez votre chemin d'application ici
+@ApplicationPath("api")
 public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
-        // Utilisez la servletConfig passée en argument
+        int jerseyPort = 8081;
 
-        // Assurez-vous de gérer correctement les erreurs de conversion
-        // ça marche pas
-        int jerseyPort = 8081; // Port par défaut si la valeur du port n'est pas valide
-
-        // Définissez le port pour Jersey
         property("jersey.config.server.port", jerseyPort);
-
-        // Ajoutez le chemin relatif à votre package de contrôleurs
         packages("imt.projetrentree.projet.controllers");
 
-        // allow all cors
         register(CORSFilter.class);
         register(AuthenticationFilter.class);
 

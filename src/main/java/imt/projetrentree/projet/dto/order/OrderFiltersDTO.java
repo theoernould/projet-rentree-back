@@ -19,8 +19,8 @@ public class OrderFiltersDTO {
 
     public OrderFilters toOrderFilters() {
         return OrderFilters.builder()
-                .sortingMethod(convertToEnum(OrderSortingMethod.class, sortingMethod, "Invalid sorting method"))
-                .sortingOrder(convertToEnum(SortingOrder.class, sortingOrder, "Invalid sorting order"))
+                .sortingMethod(convertToEnum(OrderSortingMethod.class, sortingMethod, "Méthode de tri invalide"))
+                .sortingOrder(convertToEnum(SortingOrder.class, sortingOrder, "Ordre de tri invalide"))
                 .build();
     }
 }

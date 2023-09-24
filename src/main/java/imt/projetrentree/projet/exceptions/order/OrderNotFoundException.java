@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class OrderNotFoundException extends CustomException {
     public OrderNotFoundException() {
-        super(Response.Status.NOT_FOUND, "Order not found");
+        super(Response.Status.NOT_FOUND, "La commande n'a pas été trouvée");
     }
 }

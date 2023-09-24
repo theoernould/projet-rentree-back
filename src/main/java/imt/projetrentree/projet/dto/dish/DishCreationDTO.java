@@ -23,8 +23,8 @@ public class DishCreationDTO {
     private List<String> tags;
     private String diet;
 
-    @NotNull(message = "Price is mandatory")
-    @PositiveOrZero(message = "Price must be positive or zero")
+    @NotNull(message = "Le prix ne peut pas être nul")
+    @PositiveOrZero(message = "Le prix ne peut pas être négatif")
     private Double price;
 
     public Dish toDish() {

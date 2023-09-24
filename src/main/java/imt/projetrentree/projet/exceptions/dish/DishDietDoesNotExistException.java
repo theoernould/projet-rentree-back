@@ -8,6 +8,6 @@ import static imt.projetrentree.projet.services.UtilsService.getEnumKeysString;
 
 public class DishDietDoesNotExistException extends CustomException {
     public DishDietDoesNotExistException() {
-        super(Response.Status.NOT_FOUND, "The dish  diet  does not exist. Valid categories are : " + getEnumKeysString(DishDiet.class));
+        super(Response.Status.NOT_FOUND, "Ce régime de plat n'est pas valides. Les régimes valides sont : " + getEnumKeysString(DishDiet.class));
     }
 }

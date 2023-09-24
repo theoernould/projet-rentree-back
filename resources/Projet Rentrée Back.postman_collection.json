@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2680bc7d-2d49-415a-bbb2-5066c84759b7",
+		"_postman_id": "9366b85f-bc3c-4540-a94c-2514542353b0",
 		"name": "Projet Rentrée Back",
 		"description": "Cette collection contient toutes les requêtes utiles à faire à l'API Rest de notre projet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -143,7 +143,7 @@
 								"1"
 							]
 						},
-						"description": "Permet de récuperer le detail d'un plat à partir de son id.\n\n``` json\n{\n    \"id\": 1,\n    \"name\": \"Spaghetti Carbonara\",\n    \"description\": \"Classic Italian pasta dish with eggs, cheese, pancetta, and black pepper.\",\n    \"alergens\": \"Contains: eggs, dairy, pork\",\n    \"image\": \"https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg\",\n    \"tags\": [\n        \"MEAT\"\n    ],\n    \"diet\": \"NORMAL\",\n    \"price\": 12.99\n}\n\n ```"
+						"description": "Permet de récuperer le detail d'un plat à partir de son id.\n\n``` json\n{\n    \"id\": 1,\n    \"name\": \"Spaghetti Carbonara\",\n    \"description\": \"Plat de pâtes italien classique avec des œufs, du fromage, de la pancetta et du poivre noir.\",\n    \"alergens\": \"Contient: œufs, produits laitiers, porc\",\n    \"image\": \"https://img.cuisineaz.com/660x660/2023/04/11/i192604-pates-a-la-carbonara.jpg\",\n    \"tags\": [\n        \"MEAT\"\n    ],\n    \"diet\": \"NORMAL\",\n    \"price\": 12.99\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -190,7 +190,7 @@
 								"diets"
 							]
 						},
-						"description": "Permet de recuperer la liste des regime alimentaires des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"VEGAN\": \"Vegan\",\n    \"VEGETARIAN\": \"Vegetarian\",\n    \"NORMAL\": \"Normal\"\n}\n\n ```"
+						"description": "Permet de recuperer la liste des regime alimentaires des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"NORMAL\": \"Normal\",\n    \"VEGAN\": \"Vegan\",\n    \"VEGETARIAN\": \"Végétarien\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -209,7 +209,7 @@
 								"tags"
 							]
 						},
-						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"MEAT\": \"Meat\",\n    \"DESSERT\": \"Dessert\",\n    \"OTHER\": \"Other\",\n    \"HEALTHY\": \"Healthy\",\n    \"VEGETABLE\": \"Vegetable\",\n    \"DRINK\": \"Drink\",\n    \"FISH\": \"Fish\"\n}\n\n ```"
+						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"MEAT\": \"Viande\",\n    \"FISH\": \"Poisson\",\n    \"DESSERT\": \"Dessert\",\n    \"VEGETABLE\": \"Legume\",\n    \"DRINK\": \"Boisson\",\n    \"OTHER\": \"Autre\",\n    \"HEALTHY\": \"Healthy\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -228,7 +228,7 @@
 								"sortingMethods"
 							]
 						},
-						"description": "Permet de recuperer la liste des méthode de tri des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"PRICE\": \"Price\",\n    \"NAME\": \"Name\"\n}\n\n ```"
+						"description": "Permet de recuperer la liste des méthode de tri des plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"NAME\": \"Nom\",\n    \"PRICE\": \"Prix\",\n    \"ID\": \"Id\"\n}\n\n ```"
 					},
 					"response": []
 				}
@@ -301,7 +301,7 @@
 								"register"
 							]
 						},
-						"description": "Permet de créer un compte en fournissant nom, prénom, email et mot de passe ainsi qu'une adresse"
+						"description": "Permet de créer un compte en fournissant nom, prénom, email et mot de passe ainsi qu'une adresse\n\nUn compte crée démarre avec un solde de 100€."
 					},
 					"response": []
 				},
@@ -402,7 +402,7 @@
 								}
 							]
 						},
-						"description": "Permet de reinitialiser le mot de passe d'un compte.\n\nLe token envoyé n'est valide que s'il proviens d'un mail envoyé à l'addresse mail d'un compte."
+						"description": "Permet de reinitialiser le mot de passe d'un compte.\n\nLe token envoyé n'est valide que s'il proviens d'un mail envoyé à l'adresse mail d'un compte."
 					},
 					"response": []
 				},
@@ -461,7 +461,7 @@
 					"response": []
 				}
 			],
-			"description": "Gestion des utilisateurs et de tout le système d'authentification.\n\nEn base de données, un utilisateur est représenté par la table CUSTOMERS qui contient :\n\n- un email, idéalement une adresse mail existante valide puisque un mail y sera envoyé pour une demande de changement de mot de passe, le passage d'une nouvelle commande, ...\n- un mot de passe\n- un nom\n- un prénom\n- une cagnote\n    \n- une adresse\n    \n- un booleen permettant de savoir si l'utilisateur à les permissions d'admin\n    \n\nToute notre gestion des utilisateur se base sur un token retourné à la connexion. A chaque connexion, ce token est différent. Il envoyé dans le header de chaque requête qui recupère des données liées à un utilisateur. Attention, les tokens sont tous supprimés à l'arrêt de l'API, ce qui déconnecte tous les utilisateurs.\n\nDeux comptes sont déjà créés au lancement de l'API :\n\n- Compte de test :\n    - **Mail** : [user@user.com](https://mailto:user@user.com)\n    - **Mot de passe** : user\n- Compte de test avec les privilèges administrateur :\n    - **Mail** : [admin@admin.com](https://mailto:admin@admin.com)\n    - **Mot de passe** : admin"
+			"description": "Gestion des utilisateurs et de tout le système d'authentification.\n\nEn base de données, un utilisateur est représenté par la table CUSTOMERS qui contient :\n\n- un email, idéalement une adresse mail existante valide puisque un mail y sera envoyé pour une demande de changement de mot de passe, le passage d'une nouvelle commande, ...\n- un mot de passe\n- un nom\n- un prénom\n- une cagnote\n- une adresse\n- un booleen permettant de savoir si l'utilisateur à les permissions d'admin\n    \n\nToute notre gestion des utilisateur se base sur un token retourné à la connexion. A chaque connexion, ce token est différent. Il envoyé dans le header de chaque requête qui recupère des données liées à un utilisateur. Attention, les tokens sont tous supprimés à l'arrêt de l'API, ce qui déconnecte tous les utilisateurs.\n\nDeux comptes sont déjà créés au lancement de l'API :\n\n- Compte de test :\n    - **Mail** : [user@user.com](https://mailto:user@user.com)\n    - **Mot de passe** : user\n- Compte de test avec les privilèges administrateur (nécessaires pour pouvoir acceder à certaines requêtes) :\n    \n    - **Mail** : [admin@admin.com](https://mailto:admin@admin.com)\n    - **Mot de passe** : admin"
 		},
 		{
 			"name": "Orders",
@@ -531,7 +531,7 @@
 								"orders"
 							]
 						},
-						"description": "Permet de passer une commande en tant qu'utilisateur connecté.\n\nLe contenu de la commande contient la liste des id des plats choisis (ci-dessous 3 et 4) associés à leurs quantités (ci-dessous 1 et 2), et l'adresse de livraison"
+						"description": "Permet de passer une commande en tant qu'utilisateur connecté.\n\nLe contenu de la commande contient la liste des id des plats choisis (ci-dessous 3 et 4) associés à leurs quantités (ci-dessous 1 et 2), et l'adresse de livraison\n\n**ATTENTION : Pour passer un commande, il faut suffisement d'argent sur son compte.** Les comptes créés possèdant un solde de seulement 100 euros au départ, nous avons fait en sorte que les comptes admin et user par défaut démarent avec 10000 euros pour pouvoir tester."
 					},
 					"response": []
 				},
@@ -569,7 +569,7 @@
 								"sortingMethods"
 							]
 						},
-						"description": "Permet de recuperer les modes de tris des commandes aisin que leurs labels associés.\n\n``` json\n{\n    \"DATE\": \"Date\",\n    \"PRICE\": \"Price\"\n}\n\n ```"
+						"description": "Permet de recuperer les modes de tris des commandes aisin que leurs labels associés.\n\n``` json\n{\n    \"DATE\": \"Date\",\n    \"PRICE\": \"Prix\"\n}\n\n ```"
 					},
 					"response": []
 				}
@@ -591,7 +591,7 @@
 						"sortingOrders"
 					]
 				},
-				"description": "Permet de recuperer les modes de tri (ascendant ou descendant) ainsi que leurs labels associés.\n\n``` json\n{\n    \"DESC\": \"Descending\",\n    \"ASC\": \"Ascending\"\n}\n\n ```"
+				"description": "Permet de recuperer les modes de tri (ascendant ou descendant) ainsi que leurs labels associés.\n\n``` json\n{\n    \"DESC\": \"Descendant\",\n    \"ASC\": \"Ascendant\"\n}\n\n ```"
 			},
 			"response": []
 		},

@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class EmailAlreadyUsedException extends CustomException {
     public EmailAlreadyUsedException() {
-        super(Response.Status.CONFLICT, "Email already used");
+        super(Response.Status.CONFLICT, "Cette adresse mail est déjà utilisée par un autre compte");
     }
 }

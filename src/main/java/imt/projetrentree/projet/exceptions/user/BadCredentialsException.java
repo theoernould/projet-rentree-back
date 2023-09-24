@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class BadCredentialsException extends CustomException {
     public BadCredentialsException() {
-        super(Response.Status.UNAUTHORIZED, "Bad credentials");
+        super(Response.Status.UNAUTHORIZED, "Les identifiants sont incorrects");
     }
 }

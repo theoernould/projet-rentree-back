@@ -8,6 +8,6 @@ import static imt.projetrentree.projet.services.UtilsService.getEnumKeysString;
 
 public class DishTagDoesNotExistException extends CustomException {
     public DishTagDoesNotExistException() {
-        super(Response.Status.NOT_FOUND, "The dish  tag  does not exist. Valid categories are : " + getEnumKeysString(DishTag.class));
+        super(Response.Status.NOT_FOUND, "Cette catégorie de plat n'existe pas. Les catégories valides sont : " + getEnumKeysString(DishTag.class));
     }
 }

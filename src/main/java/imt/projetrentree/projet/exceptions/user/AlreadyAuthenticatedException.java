@@ -5,6 +5,6 @@ import jakarta.ws.rs.core.Response;
 
 public class AlreadyAuthenticatedException extends CustomException {
     public AlreadyAuthenticatedException() {
-        super(Response.Status.CONFLICT, "User already authenticated");
+        super(Response.Status.CONFLICT, "Cette utilisateur est déjà connecté");
     }
 }

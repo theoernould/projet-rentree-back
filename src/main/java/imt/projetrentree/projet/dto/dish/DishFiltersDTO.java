@@ -30,17 +30,17 @@ public class DishFiltersDTO {
 
     public DishFilters toDishFilters() {
         return DishFilters.builder()
-                .lowerPrice(convertToDouble(lowerPrice, "Invalid lower price format"))
-                .upperPrice(convertToDouble(upperPrice, "Invalid upper price format"))
+                .lowerPrice(convertToDouble(lowerPrice, "Le format du prix minimum est invalide"))
+                .upperPrice(convertToDouble(upperPrice, "Le format du prix maximum est invalide"))
                 .diets(diets.stream()
-                        .map(diet -> convertToEnum(DishDiet.class, diet, "Invalid diet value"))
+                        .map(diet -> convertToEnum(DishDiet.class, diet, "Valeur de régime invalide"))
                         .toList())
                 .tags(tags.stream()
-                        .map(tag -> convertToEnum(DishTag.class, tag, "Invalid tag value"))
+                        .map(tag -> convertToEnum(DishTag.class, tag, "Valeur de catégorie invalide"))
                         .toList())
                 .searchText(searchText.trim())
-                .sortBy(convertToEnum(DishSortingMethod.class, sortBy, "Invalid sort method"))
-                .sortOrder(convertToEnum(SortingOrder.class, sortOrder, "Invalid sort order"))
+                .sortBy(convertToEnum(DishSortingMethod.class, sortBy, "Méthode de tri invalide"))
+                .sortOrder(convertToEnum(SortingOrder.class, sortOrder, "Ordre de tri invalide"))
                 .build();
     }
 

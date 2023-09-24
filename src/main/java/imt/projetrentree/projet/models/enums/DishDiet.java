@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum DishDiet {
     NORMAL("Normal"),
     VEGAN("Vegan"),
-    VEGETARIAN("Vegetarian");
+    VEGETARIAN("Végétarien");
 
     private final String label;
 }
