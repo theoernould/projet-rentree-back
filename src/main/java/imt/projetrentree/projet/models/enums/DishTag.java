@@ -12,6 +12,9 @@ public enum DishTag {
     DESSERT("Dessert"),
     DRINK("Boisson"),
     HEALTHY("Healthy"),
+    VEGAN("Vegan"),
+    DAIRY("Produits laitiers"),
+    POULTRY("Volaille"),
     OTHER("Autre");
 
     private final String label;

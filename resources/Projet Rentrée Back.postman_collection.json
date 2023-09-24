@@ -209,7 +209,7 @@
 								"tags"
 							]
 						},
-						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"MEAT\": \"Viande\",\n    \"FISH\": \"Poisson\",\n    \"DESSERT\": \"Dessert\",\n    \"VEGETABLE\": \"Legume\",\n    \"DRINK\": \"Boisson\",\n    \"OTHER\": \"Autre\",\n    \"HEALTHY\": \"Healthy\"\n}\n\n ```"
+						"description": "Permet de recuperer la liste des tag que l'on peut associer aux plats ainsi que leurs labels associés.\n\n``` json\n{\n    \"HEALTHY\": \"Healthy\",\n    \"DESSERT\": \"Dessert\",\n    \"POULTRY\": \"Volaille\",\n    \"OTHER\": \"Autre\",\n    \"DRINK\": \"Boisson\",\n    \"VEGETABLE\": \"Legume\",\n    \"MEAT\": \"Viande\",\n    \"VEGAN\": \"Vegan\",\n    \"DAIRY\": \"Produits laitiers\",\n    \"FISH\": \"Poisson\"\n}\n\n ```"
 					},
 					"response": []
 				},
