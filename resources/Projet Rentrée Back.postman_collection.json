@@ -256,7 +256,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"admin\"\r\n}",
+							"raw": "{\r\n    \"email\":\"user@user.com\",\r\n    \"password\":\"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -457,6 +457,31 @@
 							]
 						},
 						"description": "Permet de verifier si un token de réinitialisation de mot de passe est toujours valide."
+					},
+					"response": []
+				},
+				{
+					"name": "VerifyPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/verifyPassword?password=user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"verifyPassword"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "user"
+								}
+							]
+						},
+						"description": "Permet de verifier un mot de passe pour savoir s'il correspond bien à celui de l'utilisateur connecté.\n\nUtilisé pour la reinitialisation de mot de passe."
 					},
 					"response": []
 				}

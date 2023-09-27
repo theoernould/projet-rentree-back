@@ -47,6 +47,13 @@ public class UserController {
         return Response.ok().cookie(cookie).build();
     }
 
+    @POST
+    @Path("verifyPassword")
+    @NeedToBeAuthenticated
+    public boolean verifyPassword(@QueryParam("password") String password){
+        return userService.verifyPassword(password);
+    }
+
     @GET
     @Path("resetPasswordMail")
     public void resetPasswordMal(@QueryParam("email") String email) {

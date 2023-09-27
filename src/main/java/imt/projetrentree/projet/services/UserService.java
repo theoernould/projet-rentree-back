@@ -102,6 +102,11 @@ public class UserService {
         emailService.sendPasswordChangeConfirmationEmail(user);
     }
 
+    public boolean verifyPassword(String password){
+        User user = getCurrentUser();
+        return user.getPassword().equals(password);
+    }
+
     private void verifyThatUserIsNotAlreadyAuthenticated(User user) {
         if (UserService.usersIds.values().stream().anyMatch(id -> id.equals(user.getId()))) {
             throw new AlreadyAuthenticatedException();
