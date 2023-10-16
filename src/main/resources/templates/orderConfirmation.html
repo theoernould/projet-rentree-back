@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Summary</title>
+    <title>Récapitulatif de commande</title>
     <style>
-        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
@@ -59,34 +58,34 @@
 
 <body>
 <div class="container">
-    <h1>Order Summary for <span th:text="${user.firstname} + ' ' + ${user.lastname}">John Doe</span></h1>
+    <h1>Récapitulatif de commande pour <span th:text="${user.firstname} + ' ' + ${user.lastname}">John Doe</span></h1>
     <table>
         <thead>
         <tr>
             <th>Image</th>
-            <th>Product Name</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
+            <th>Nom du produit</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="entry : ${dishesWithQuantities}">
-            <td><img th:src="${entry.key.image}" alt="Dish Image" width="50"></td>
-            <td th:text="${entry.key.name}">Dish Name</td>
-            <td th:text="${entry.key.price} + ' $'">10 $</td>
+            <td><img th:src="${entry.key.image}" alt="Image du plat" width="50"></td>
+            <td th:text="${entry.key.name}">Nom du plat</td>
+            <td th:text="${entry.key.price} + ' €'">10 €</td>
             <td th:text="${entry.value}">2</td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="3" class="total">Total Price:</td>
-            <td th:text="${orderTotalPrice} + ' $'">20 $</td>
+            <td colspan="3" class="total">Prix total:</td>
+            <td th:text="${orderTotalPrice} + ' €'">20 €</td>
         </tr>
         </tfoot>
     </table>
     <div>
-        <h2>Delivery Address:</h2>
-        <p th:text="${address}">123 Main St, Springfield</p>
+        <h2>Adresse de livraison:</h2>
+        <p th:text="${address}">123 Rue Principale, Springfield</p>
     </div>
 </div>
 </body>
