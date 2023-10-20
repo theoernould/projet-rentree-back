@@ -77,7 +77,7 @@ public class EmailService {
         Context context = new Context();
         context.setVariable("user", orderSummaryDTO.getUser());
         context.setVariable("dishesWithQuantities", orderSummaryDTO.getDishesWithQuantities());
-        context.setVariable("orderTotalPrice", orderSummaryDTO.getTotalPrice());
+        context.setVariable("orderTotalPrice", UtilsService.round(orderSummaryDTO.getTotalPrice(), 2));
         context.setVariable("address", orderSummaryDTO.getAddress());
 
         sendMail(orderSummaryDTO.getUser().getEmail(), "Résumé de votre commande", "orderConfirmation", context);

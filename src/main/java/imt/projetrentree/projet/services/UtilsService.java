@@ -5,6 +5,8 @@ import jakarta.ws.rs.core.Response;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +45,14 @@ public class UtilsService {
 
     public static String getEnumKeysString(Class<? extends Enum<?>> enumClass) {
         return Arrays.toString(enumClass.getEnumConstants());
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }
